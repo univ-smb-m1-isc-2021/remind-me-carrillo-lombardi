@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>rest-service</artifactId>
+	<artifactId> remind-me-carrillo-lombardi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rest-service</name>
-	<description>Demo project for Spring Boot</description>
+	<name> remind-me-carrillo-lombardi</name>
+	<description>le bot de reminde me de discord mais en spring</description>
 	<properties>
 		<java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
