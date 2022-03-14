@@ -1,4 +1,4 @@
-package com.example.restservice.controller.web;
+package com.example.remindme.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

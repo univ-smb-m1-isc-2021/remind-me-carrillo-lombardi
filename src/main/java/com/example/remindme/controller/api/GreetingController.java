@@ -1,8 +1,8 @@
-package com.example.restservice.controller.api;
+package com.example.remindme.controller.api;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.example.restservice.classes.Greeting;
+import com.example.remindme.classes.Greeting;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

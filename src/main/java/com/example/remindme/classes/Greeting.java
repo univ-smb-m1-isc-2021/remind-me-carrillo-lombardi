@@ -1,4 +1,4 @@
-package com.example.restservice.classes;
+package com.example.remindme.classes;
 
 public class Greeting {
 

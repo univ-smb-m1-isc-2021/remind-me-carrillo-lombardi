@@ -1,10 +1,10 @@
-package com.example.restservice;
+package com.example.remindme;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestServiceApplicationTests {
+class RemindMeApplicationTests {
 
 	@Test
 	void contextLoads() {
