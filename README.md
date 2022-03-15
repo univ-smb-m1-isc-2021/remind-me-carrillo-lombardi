@@ -16,3 +16,12 @@ Fonctionnalitées :
 Bonus :
 
     Intégration web ou android avec l api google ou facebook permettant de récupérer les dates de naissance des contacts et écran de sélection / filtrage
+
+
+Commandes:
+
+docker-compose up
+mvn spring-boot:run
+
+http://localhost/home
+http://localhost:5050 --> pgadmin: post@gres.sql password

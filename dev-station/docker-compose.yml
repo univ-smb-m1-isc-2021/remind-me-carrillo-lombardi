@@ -9,3 +9,14 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: password
+
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: post@gres.sql
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "5050:80"
