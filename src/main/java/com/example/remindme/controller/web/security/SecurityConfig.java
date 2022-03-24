@@ -15,6 +15,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        System.out.println("---------------------------------------------\n!!!!!!!!!!!!!!!!!!");
+
+        System.out.println("!!!!!!!!!!!!!!!!!!\n----------------------------------------------");
         auth.inMemoryAuthentication()
                 .withUser("guillaume").password(passwordEncoder().encode("guillaume")).roles("ADMIN");
     }
@@ -30,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login-form")
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/admin", true)
-                .failureUrl("/");
+                .failureUrl("/login-form"); //rediriger ailleur plus tard
     }
 
     @Bean
