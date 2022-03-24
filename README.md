@@ -23,5 +23,7 @@ Commandes:
 docker-compose up
 mvn spring-boot:run
 
-http://localhost/home
+http://localhost:8080/home
 http://localhost:5050 --> pgadmin: post@gres.sql password
+
+http://www.plantuml.com/plantuml/uml/JOzD3e8m44Rtd6BMtNW192IM5I29HEDsAbKdeLD2MvNRInjDMCsRlFd9LpgFipV4Wy4f4o2r8kHC23Yhm3wi9A0X3XzeYNrgwx1H6wvb1KTjqtRJoYhMtexBSAqJUescwoEUq4tn3xp9Fm7XfUS5HiiFO3Gw7SjT4QUCkkKxLy2-WAvl3rkrtEclBdOCXcnMwZN7ByiN

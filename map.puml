@@ -1,0 +1,34 @@
+
+@startmindmap
+<style>
+mindmapDiagram {
+  .done {
+    BackgroundColor lightgreen
+  }
+  .wip {
+    BackgroundColor pink
+  }
+}
+</style>
+
+* Remind-me <<done>>
+** Site Backend
+*** Multi-utilisateur
+**** Gestion de compte sur React
+*** Envoi de notification
+**** Mail, SMS, API Discord ou Whatsapp
+** Site Frontend
+*** Accessible en FR et EN
+**** Récupérer langue du navigateur
+**** Comment réaliser la traduction ? traducteur vs brut
+*** Ajout d'évènement
+*** Configurer évènement (périodique)
+*** Valider, stopper notification pour un évènement
+*** Homepage avec évènement classé
+**** Comment trié sur react ?
+** API
+*** CRUD Utilisateur / Evenement
+**** Utilisation de BDD dans Spring
+*** Importer / exporter
+**** Spring to JSON ?
+@endmindmap
