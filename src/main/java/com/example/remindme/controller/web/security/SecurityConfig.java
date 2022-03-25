@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         System.out.println("!!!!!!!!!!!!!!!!!!\n----------------------------------------------");
         auth.inMemoryAuthentication()
-                .withUser("guillaume").password(passwordEncoder().encode("guillaume")).roles("ADMIN");
+                .withUser("a").password(passwordEncoder().encode("a")).roles("ADMIN");
     }
 
     @Override

@@ -5,6 +5,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <div>OMG ta réussi a te connecté</div>
+    <h1>OMG ta réussi a te connecté</h1>
+    <table>
+        <thead>
+        <tr>
+            <th th:text="Id"></th>
+            <th th:text="Title"></th>
+            <th th:text="Details"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.id}"></td>
+            <td th:text="${event.title}"></td>
+            <td th:text="${event.details}"></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>

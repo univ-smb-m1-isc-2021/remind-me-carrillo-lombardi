@@ -21,7 +21,7 @@ Bonus :
 Commandes:
 
 docker-compose up
-mvn spring-boot:run
+mvn verify spring-boot:run
 
 http://localhost:8080/home
 http://localhost:5050 --> pgadmin: post@gres.sql password
