@@ -20,13 +20,31 @@ public class EventService {
         return repository.findAll();
     }
 
-    public void delete(Long factId) {
-        Optional<Event> fact = repository.findById(factId);
-        fact.ifPresent(repository::delete);
+    public void delete(Long eventId) {
+        Optional<Event> event = repository.findById(eventId);
+        event.ifPresent(repository::delete);
     }
 
     public void create(String title, String details) {
-        // FIXME : check if not already present
-        repository.save(new Event(title, details));
+        Event temp = new Event(title, details);
+
+        if(!isPresent(temp))
+            repository.save(temp);
+    }
+
+    public void update(Long eventId, String title, String details) {
+        Event event = repository.getById(eventId);
+        event.setTitle(title);
+        event.setDetails(details);
+
+        repository.save(event); //! checker si ça écrase bien l'autre
+    }
+
+    private boolean isPresent(Event event) {
+        for (Event elem : events()) {
+            if(elem.getTitle().equals(event.getTitle())) //TODO ajouter date
+                return true;
+        }
+        return false;
     }
 }

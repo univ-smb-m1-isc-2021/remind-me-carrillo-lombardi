@@ -20,6 +20,9 @@ Bonus :
 
 Commandes:
 
+sudo systemctl start docker.service
+sudo docker-compose up
+
 docker-compose up
 mvn verify spring-boot:run
 
