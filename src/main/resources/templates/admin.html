@@ -5,7 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>OMG ta réussi a te connecté</h1>
+    <h1 th:utext="#{label.congrat}"></h1>
+    <h2 data-th-text="#{label.congrat}"></h2>
+
+    <div>
+        <a th:href="@{/admin?lang=en}">Login (English)</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/admin?lang=fr}">Login (French)</a>
+     </div>
+
     <table>
         <thead>
         <tr>
