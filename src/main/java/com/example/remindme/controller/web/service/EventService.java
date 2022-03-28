@@ -1,6 +1,7 @@
 package com.example.remindme.controller.web.service;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class EventService {
         event.ifPresent(repository::delete);
     }
 
-    public void create(String title, String details) {
-        Event temp = new Event(title, details);
+    public void create(String title, String details, Date date) {
+        Event temp = new Event(title, details, date);
 
         if(!isPresent(temp))
             repository.save(temp);

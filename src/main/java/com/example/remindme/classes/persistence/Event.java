@@ -1,8 +1,12 @@
 package com.example.remindme.classes.persistence;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Event {
@@ -12,12 +16,15 @@ public class Event {
 
     private String title;
     private String details; //a finir
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private Date date;
 
     public Event() { }
 
-    public Event(String title, String details) {
+    public Event(String title, String details,Date date) {
         this.title = title;
         this.details = details;
+        this.date = date;
     }
 
     public Long getId() {
@@ -42,5 +49,13 @@ public class Event {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

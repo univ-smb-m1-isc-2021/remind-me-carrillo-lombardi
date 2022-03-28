@@ -3,6 +3,8 @@ package com.example.remindme.classes.persistence;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 
 @Service
@@ -22,8 +24,8 @@ class Initializer {
         eRep.deleteAllInBatch();
 
         if (eRep.findAll().isEmpty()) {
-            eRep.saveAndFlush(new Event("Event 1", "description hyper poussé"));
-            eRep.saveAndFlush(new Event("Event 2", "non je suis quand meme pas sur la bdd ?!"));
+            eRep.saveAndFlush(new Event("Event 1", "description hyper poussé", new Date()));
+            eRep.saveAndFlush(new Event("Event 2", "non je suis quand meme pas sur la bdd ?!", new Date()));
         }
 
         uRep.deleteAllInBatch();
