@@ -12,8 +12,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration 
 public class Config implements WebMvcConfigurer {
-
 	 
+    //save as cookie the language
 	@Bean(name = "localeResolver")
 	public LocaleResolver getLocaleResolver()  {
 		CookieLocaleResolver resolver= new CookieLocaleResolver();
@@ -23,6 +23,7 @@ public class Config implements WebMvcConfigurer {
 		return resolver;
 	} 
 	
+    //configre messages
 	@Bean(name = "messageSource")
 	public MessageSource getMessageResource()  {
 		ReloadableResourceBundleMessageSource messageResource= new ReloadableResourceBundleMessageSource();
@@ -31,39 +32,12 @@ public class Config implements WebMvcConfigurer {
 		messageResource.setDefaultEncoding("UTF-8");
 		return messageResource;
 	}
+
+    //if we add a "lang" parameter in the url
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor localeInterceptor = new LocaleChangeInterceptor();
 		localeInterceptor.setParamName("lang");
-		
-		
 		registry.addInterceptor(localeInterceptor).addPathPatterns("/*");
 	}
-	
 }
-
-// import org.springframework.context.MessageSource;
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.context.support.ResourceBundleMessageSource;
-// import org.springframework.web.servlet.LocaleResolver;
-// import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-// import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-
-// @Configuration
-// public class Config implements WebMvcConfigurer {
-
-//     @Bean("messageSource")
-//     public MessageSource messageSource() {
-//         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//         messageSource.setBasenames("resources/translations/messages");
-//         messageSource.setDefaultEncoding("UTF-8");
-//         return messageSource;
-//     }
-
-//     //Language du navigateur
-//     @Bean
-//     public LocaleResolver localeResolver() {
-//         return new CookieLocaleResolver();
-//     }
-// }

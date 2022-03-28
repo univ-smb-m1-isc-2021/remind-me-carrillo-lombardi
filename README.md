@@ -37,3 +37,6 @@ http://www.plantuml.com/plantuml/uml/JOzD3e8m44Rtd6BMtNW192IM5I29HEDsAbKdeLD2MvN
 
 Projet Spring pour s'inspirer:
 https://github.com/joerodriguez/spring-boot-todo-example/tree/master/src/main/java/com/github/joerodriguez/springbootexample
+
+Translation:
+https://o7planning.org/11691/create-a-multi-language-web-application-with-spring-boot
