@@ -6,5 +6,19 @@
 </head>
 <body>
     <div>yo mec test sonar </div>
+    <h1>New Fact : </h1>
+    <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
+        <table>
+            <tbody>
+            <tr>
+                <td><input name="title" type="text" size="140" th:field="*{title}"></td>
+                <td><input name="details" type="text" size="140" th:field="*{details}"></td>
+                <td>
+                    <button type="submit" th:text="Create"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 </body>
 </html>
