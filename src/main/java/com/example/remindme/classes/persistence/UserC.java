@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserC { //UserClass I change the nmae cause of mysql (UserC is a reserved keyword)
     @Id
     @GeneratedValue
     private Long id;
@@ -13,11 +13,11 @@ public class User {
     private String name;
     private String password;
 
-    public User() {
+    public UserC() {
         
     }
 
-    public User(String name, String password) {
+    public UserC(String name, String password) {
         this.name = name;
         this.password = password;
     }

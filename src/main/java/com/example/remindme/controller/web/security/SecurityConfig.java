@@ -1,7 +1,7 @@
 package com.example.remindme.controller.web.security;
 
-import com.example.remindme.controller.web.service.UserService;
-import com.example.remindme.classes.persistence.User;
+import com.example.remindme.controller.web.service.UserCService;
+import com.example.remindme.classes.persistence.UserC;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
