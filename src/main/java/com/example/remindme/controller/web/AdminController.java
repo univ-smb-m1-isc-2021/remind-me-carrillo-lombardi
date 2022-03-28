@@ -11,7 +11,6 @@ public class AdminController {
 
 	private final EventService eventService;
 	
-
     public AdminController(EventService eventService) {
         this.eventService = eventService;
     }
