@@ -1,7 +1,7 @@
 package com.example.remindme.controller.web.security;
 
-import com.example.remindme.controller.web.service.UserCService;
-import com.example.remindme.classes.persistence.UserC;
+import com.example.remindme.controller.web.service.UserEntityService;
+import com.example.remindme.classes.persistence.UserEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,22 +17,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // @Autowired
-    // private UserService userService; //j'ai enlever le final
+    @Autowired
+    UserEntityService UserEntityService; //j'ai enlever le final
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("---------------------------------------------\n!!!!!!!!!!!!!!!!!!");
+        if(UserEntityService.users().size()==0)
+            System.out.println("No users");
 
-        // if(userService.users().size()==0)
-        //     System.out.println("No users");
-        // for (User elem : userService.users()) {
-        //     System.out.println(elem.getName());
-        // }
-
-        System.out.println("!!!!!!!!!!!!!!!!!!\n----------------------------------------------");
-        auth.inMemoryAuthentication()
-                .withUser("a").password(passwordEncoder().encode("a")).roles("ADMIN");
+        for (UserEntity elem : UserEntityService.users()) {
+            // System.out.println(elem.getName());
+            auth.inMemoryAuthentication()
+                .withUser(elem.getName()).password(elem.getPassword()).roles("ADMIN");
+        }
     }
 
     @Override

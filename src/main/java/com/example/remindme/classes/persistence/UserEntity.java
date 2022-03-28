@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class UserC { //UserClass I change the nmae cause of mysql (UserC is a reserved keyword)
+public class UserEntity { //UserEntitylass I change the nmae cause of mysql (UserEntity is a reserved keyword)
     @Id
     @GeneratedValue
     private Long id;
@@ -13,11 +13,11 @@ public class UserC { //UserClass I change the nmae cause of mysql (UserC is a re
     private String name;
     private String password;
 
-    public UserC() {
+    public UserEntity() {
         
     }
 
-    public UserC(String name, String password) {
+    public UserEntity(String name, String password) {
         this.name = name;
         this.password = password;
     }

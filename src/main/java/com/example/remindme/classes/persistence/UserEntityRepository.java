@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserCRepository extends JpaRepository<UserC, Long> {
+public interface UserEntityRepository extends JpaRepository<UserEntity, Long> {
 
-    UserC findByName(String title);
-    UserC findById(long id);
+    UserEntity findByName(String title);
+    UserEntity findById(long id);
 }
