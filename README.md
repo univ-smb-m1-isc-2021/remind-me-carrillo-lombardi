@@ -5,8 +5,8 @@ But :
 Fonctionnalitées :
 
 - [ ] application mutli-utilisateur (s'enregistrer / supprimer son compte / social login)
-- [ ] Accessible en Francais et en Anglais, (Détection de la langue du navigateur ET possibilité de forcer une langue)
-- [ ] En tant qu'utilisateur je peux entrer manuellement des évènements pour lesquels je souhaite être notifiés.
+- [x] Accessible en Francais et en Anglais, (Détection de la langue du navigateur ET possibilité de forcer une langue)
+- [x] En tant qu'utilisateur je peux entrer manuellement des évènements pour lesquels je souhaite être notifiés.
 - [ ] Une notification peut être faite par (mail / sms / whatsapp / discord) a un délais definit par rapport a l'évéenment. un même événement peut avoir plusieurs noifications
 - [ ] Une notification peut être validé, stoppant l'envoi de notification pour cet événement
 - [ ] Un événement peut être défini comme périodique (un anniversaire, une fête) ou une fois seulement.
