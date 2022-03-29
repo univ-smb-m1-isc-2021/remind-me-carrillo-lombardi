@@ -18,6 +18,7 @@ public class Event {
     private String details; //a finir
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date date;
+    private boolean isValided=false;
 
     public Event() { }
 
@@ -57,5 +58,13 @@ public class Event {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Boolean getIsValided() {
+        return isValided;
+    }
+
+    public void setIsValided(Boolean isValided) {
+        this.isValided = isValided;
     }
 }

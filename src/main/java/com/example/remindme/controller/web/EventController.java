@@ -19,6 +19,7 @@ import com.example.remindme.controller.web.service.EventService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -33,6 +34,18 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    @PostMapping(value="/event/validation")
+	public String valideEvent(@ModelAttribute Event event, Model model) {
+        //TODO faire en meme temps les notifs
+
+        event.setIsValided(true);
+		eventService.update(event.getId(),event,true);
+        
+        //sendNotif(event);//TODO FAUDRA envoyer en meme tps destinataire
+        return "redirect:/admin";//TODO a cahnger par home quand les test seront finis
+	}
+
+
 
     @PostMapping(value="/event/create")
 	public String createEvent(@ModelAttribute Event event, Model model) {
@@ -42,6 +55,8 @@ public class EventController {
         //sendNotif(event);//TODO FAUDRA envoyer en meme tps destinataire
         return "redirect:/admin";//TODO a cahnger par home quand les test seront finis
 	}
+
+
     //a completer
     public void sendNotif(Event event){
         //switch o foreach en fonction des demandes de mails
@@ -56,9 +71,9 @@ public class EventController {
             Date now = new Date();
             //faudra override date.equals je pense
             System.out.println(event.getDate());
-            if(sendable(now,event.getDate()) ){
-                //sendEmail(event); // TODO FAUDRA Y DECOMMENTER
-                eventService.delete(event.getId());
+            if(sendable(now,event.getDate()) && !event.getIsValided()){
+                //sendNotif(event); // TODO FAUDRA Y DECOMMENTER
+                eventService.delete(event.getId()); // remplacer le delete par rien car faut les conserver je crois mais les valider
             }
         }
 	}

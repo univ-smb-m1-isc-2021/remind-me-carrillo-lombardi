@@ -33,12 +33,16 @@ public class EventService {
             repository.save(temp);
     }
 
-    public void update(Long eventId, String title, String details) {
-        Event event = repository.getById(eventId);
-        event.setTitle(title);
-        event.setDetails(details);
+    public void update(Long eventId,Event event,Boolean updateValid) {
+        Event oldEvent = repository.getById(eventId);
+        if(!updateValid){
+            oldEvent.setTitle(event.getTitle());
+            oldEvent.setDetails(event.getDetails());
+            oldEvent.setDate(event.getDate());
+        }
+        oldEvent.setIsValided(event.getIsValided());
 
-        repository.save(event); //! checker si ça écrase bien l'autre
+        repository.save(oldEvent); //! checker si ça écrase bien l'autre
     }
 
     private boolean isPresent(Event event) {

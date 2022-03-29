@@ -1,5 +1,6 @@
 package com.example.remindme.controller.web;
 
+import com.example.remindme.classes.persistence.Event;
 import com.example.remindme.controller.web.service.EventService;
 
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ public class AdminController {
 	@GetMapping(value="/admin")
 	public String home(Model model) {
 		model.addAttribute("events", eventService.events());
+		model.addAttribute("evento", new Event());
 		return "admin";
 	}
 

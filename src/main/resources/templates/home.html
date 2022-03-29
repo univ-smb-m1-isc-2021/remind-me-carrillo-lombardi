@@ -12,13 +12,17 @@
             <tbody>
             <tr>
                 <td><input name="title" type="text" size="140" th:field="*{title}"></td>
-                <td><input name="details" type="text" size="140" th:field="*{details}"></td>
-                <td><input name="Date" type="datetime-local" size="140" th:field="*{date}"></td>
-                <!-- <td><input name="parEmailBool" type="checkbox" size="140" th:field="*{parEmailBool}"></td><br> -->
-                <td>
-                    <button type="submit" th:text="Create"></button>
-                </td>
             </tr>
+                <tr><td><input name="details" type="text" size="140" th:field="*{details}"></td>
+            </tr>
+            <tr>
+                    <td><input name="Date" type="datetime-local" size="140" th:field="*{date}"></td>
+            </tr>
+                <!-- <td><input name="parEmailBool" type="checkbox" size="140" th:field="*{parEmailBool}"></td><br> -->
+            <td>
+                <button type="submit" th:text="Create"></button>
+            </td>
+            
             </tbody>
         </table>
     </form>

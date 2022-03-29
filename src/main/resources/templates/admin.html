@@ -29,6 +29,12 @@
             <td th:text="${event.title}"></td>
             <td th:text="${event.details}"></td>
             <td th:text="${event.date}"></td>
+            <td th:if="${!event.isValided}">
+                <form action="#" th:action="@{/event/validation}" th:object="${evento}" method="post" >
+                    <input type="hidden" name="id" th:value="${event.id}"/>
+                    <input type="submit" value="Submit"/>
+                </form>  
+            </td>      
         </tr>
         </tbody>
     </table>
