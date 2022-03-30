@@ -71,12 +71,8 @@ public class EventController {
             if(sendable(now,event.getDate()) && !event.getIsValided()){
                 //sendNotif(event); // TODO FAUDRA Y DECOMMENTER
                 //eventService.delete(event.getId()); // remplacer le delete par rien car faut les conserver je crois mais les valider
-                System.out.println("YOOOOOOOOOOOO");
                 if(!event.getPeriodique()){
-                    System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
-                    //eventService.delete(event.getId());
                     eventService.update(event.getId(), event, true);
-                    System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
                 }
                     
             }
