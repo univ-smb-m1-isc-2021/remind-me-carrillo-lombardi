@@ -9,7 +9,7 @@ Fonctionnalitées :
 - [x] En tant qu'utilisateur je peux entrer manuellement des évènements pour lesquels je souhaite être notifiés.
 - [ ] Une notification peut être faite par (mail / sms / whatsapp / discord) a un délais definit par rapport a l'évéenment. un même événement peut avoir plusieurs noifications
 - [x] Une notification peut être validé, stoppant l'envoi de notification pour cet événement
-- [ ] Un événement peut être défini comme périodique (un anniversaire, une fête) ou une fois seulement.
+- [x] Un événement peut être défini comme périodique (un anniversaire, une fête) ou une fois seulement.
 - [ ] Ma homepage me montre, classée par ordre de distance les notifications a venir.
 - [ ] Je peux importer / exporter une fichier de notifications
 
