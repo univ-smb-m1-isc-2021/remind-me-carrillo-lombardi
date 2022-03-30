@@ -2,20 +2,20 @@
 But :
     Réaliser une application multilingue de collecte et d'envoi de notifications
     
-Fonctionnalitées :
+Fonctionnalités :
 
-- [ ] application mutli-utilisateur (s'enregistrer / supprimer son compte / social login)
-- [x] Accessible en Francais et en Anglais, (Détection de la langue du navigateur ET possibilité de forcer une langue)
-- [x] En tant qu'utilisateur je peux entrer manuellement des évènements pour lesquels je souhaite être notifiés.
-- [ ] Une notification peut être faite par (mail / sms / whatsapp / discord) a un délais definit par rapport a l'évéenment. un même événement peut avoir plusieurs noifications
-- [x] Une notification peut être validé, stoppant l'envoi de notification pour cet événement
+- [ ] application multi-utilisateur (s'enregistrer / supprimer son compte / social login)
+- [x] Accessible en Français et en Anglais (détection de la langue du navigateur ET possibilité de forcer une langue)
+- [x] En tant qu'utilisateur, je peux entrer manuellement des événements pour lesquels je souhaite être notifié.
+- [ ] Une notification peut être faite par (mail / sms / whatsapp / discord) a un délai définit par rapport à l'événement. Un même événement peut avoir plusieurs notifications.
+- [x] Une notification peut être validée, stoppant l'envoi de notification pour cet événement.
 - [x] Un événement peut être défini comme périodique (un anniversaire, une fête) ou une fois seulement.
-- [ ] Ma homepage me montre, classée par ordre de distance les notifications a venir.
-- [ ] Je peux importer / exporter une fichier de notifications
+- [ ] Ma homepage me montre, classée par ordre de distance les notifications à venir.
+- [ ] Je peux importer / exporter un fichier de notifications.
 
 Bonus :
 
-- [ ] Intégration web ou android avec l api google ou facebook permettant de récupérer les dates de naissance des contacts et écran de sélection / filtrage
+- [ ] Intégration web ou Android avec l'api Google ou Facebook permettant de récupérer les dates de naissance des contacts et écran de sélection / filtrage
 
 <br>
 <br>
