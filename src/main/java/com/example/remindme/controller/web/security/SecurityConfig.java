@@ -17,16 +17,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserEntityService UserEntityService; //j'ai enlever le final
+    private final UserEntityService userEntityService;
+	
+    public SecurityConfig(UserEntityService userEntityService) {
+        this.userEntityService = userEntityService;
+    }
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        if(UserEntityService.users().size()==0)
+        if(userEntityService.users().size()==0)
             System.out.println("No users");
 
-        for (UserEntity elem : UserEntityService.users()) {
-            // System.out.println(elem.getName());
+        // System.out.println("\nDans connexion\n\n");
+        // for (UserEntity elem : userEntityService.users()) {
+        //     System.out.println(elem.getName());
+        // } //!pk ça fonctionne plus ?
+
+        for (UserEntity elem : userEntityService.users()) {
             auth.inMemoryAuthentication()
                 .withUser(elem.getName()).password(elem.getPassword()).roles("ADMIN");
         }
@@ -40,10 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login-form")
+                .loginPage("/login")
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/admin", true)
-                .failureUrl("/login-form"); //rediriger ailleur plus tard
+                .failureUrl("/login"); //rediriger ailleur plus tard
     }
 
     @Bean

@@ -1,0 +1,24 @@
+<html>
+<head></head>
+<body>
+    <h1>Register</h1>
+    <form action="#" th:action="@{/register/create}" method="post">
+        <table>
+            <tr>
+                <td th:utext="#{label.user}">:</td>
+                <td><input type='text' name='username' value=''></td>
+            </tr>
+            <tr>
+                <td th:utext="#{label.password}">:</td>
+                <td><input type='password' name='password' /></td>
+            </tr>
+            <tr>
+                <td th:utext="#{label.password}">:</td>
+                <td><input type='password' name='password2' /></td>
+            </tr>
+            <tr>
+                <td><input name="submit" type="submit" value="ok" /></td>
+            </tr>
+        </table>
+    </form>
+</body>

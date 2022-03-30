@@ -48,8 +48,8 @@ public class EventController {
 	public String createEvent(@ModelAttribute Event event, Model model) {
         //TODO faire en meme temps les notifs
 		eventService.create(event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique());
-        System.out.println( dateFormat.format(event.getDate()));
-        System.out.println( event.getPeriodique());
+        // System.out.println( dateFormat.format(event.getDate()));
+        // System.out.println( event.getPeriodique());
         return "redirect:/admin";//TODO a cahnger par home quand les test seront finis
 	}
 
@@ -62,21 +62,21 @@ public class EventController {
     
     @Scheduled(fixedRate = 5000)
 	public void reportCurrentTime() {
-		System.out.println("The time is now {}" + dateFormat.format(new Date()));
+		// System.out.println("The time is now {}" + dateFormat.format(new Date()));
         List<Event> events = eventService.events();
         for (Event event : events) {
             Date now = new Date();
-            System.out.println(event.getDate());
-            System.out.println( event.getPeriodique());
+            // System.out.println(event.getDate());
+            // System.out.println( event.getPeriodique());
             if(sendable(now,event.getDate()) && !event.getIsValided()){
                 //sendNotif(event); // TODO FAUDRA Y DECOMMENTER
                 //eventService.delete(event.getId()); // remplacer le delete par rien car faut les conserver je crois mais les valider
-                System.out.println("YOOOOOOOOOOOO");
+                //System.out.println("YOOOOOOOOOOOO");
                 if(!event.getPeriodique()){
-                    System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
+                    //System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
                     //eventService.delete(event.getId());
                     eventService.update(event.getId(), event, true);
-                    System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
+                    //System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
                 }
                     
             }
