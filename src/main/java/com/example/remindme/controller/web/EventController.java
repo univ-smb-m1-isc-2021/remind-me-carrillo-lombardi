@@ -19,7 +19,6 @@ import com.example.remindme.controller.web.service.EventService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -38,10 +37,8 @@ public class EventController {
 	public String valideEvent(@ModelAttribute Event event, Model model) {
         //TODO faire en meme temps les notifs
 
-        event.setIsValided(true);
 		eventService.update(event.getId(),event,true);
         
-        //sendNotif(event);//TODO FAUDRA envoyer en meme tps destinataire
         return "redirect:/admin";//TODO a cahnger par home quand les test seront finis
 	}
 
@@ -50,9 +47,9 @@ public class EventController {
     @PostMapping(value="/event/create")
 	public String createEvent(@ModelAttribute Event event, Model model) {
         //TODO faire en meme temps les notifs
-		eventService.create(event.getTitle(), event.getDetails(), event.getDate());
+		eventService.create(event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique());
         System.out.println( dateFormat.format(event.getDate()));
-        //sendNotif(event);//TODO FAUDRA envoyer en meme tps destinataire
+        System.out.println( event.getPeriodique());
         return "redirect:/admin";//TODO a cahnger par home quand les test seront finis
 	}
 
@@ -69,11 +66,19 @@ public class EventController {
         List<Event> events = eventService.events();
         for (Event event : events) {
             Date now = new Date();
-            //faudra override date.equals je pense
             System.out.println(event.getDate());
+            System.out.println( event.getPeriodique());
             if(sendable(now,event.getDate()) && !event.getIsValided()){
                 //sendNotif(event); // TODO FAUDRA Y DECOMMENTER
-                eventService.delete(event.getId()); // remplacer le delete par rien car faut les conserver je crois mais les valider
+                //eventService.delete(event.getId()); // remplacer le delete par rien car faut les conserver je crois mais les valider
+                System.out.println("YOOOOOOOOOOOO");
+                if(!event.getPeriodique()){
+                    System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
+                    //eventService.delete(event.getId());
+                    eventService.update(event.getId(), event, true);
+                    System.out.println("YEAHHHHHHHHHHHHHHHHHHH");
+                }
+                    
             }
         }
 	}

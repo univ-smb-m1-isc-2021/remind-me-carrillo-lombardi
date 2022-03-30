@@ -26,8 +26,8 @@ public class EventService {
         event.ifPresent(repository::delete);
     }
 
-    public void create(String title, String details, Date date) {
-        Event temp = new Event(title, details, date);
+    public void create(String title, String details, Date date, Boolean periodique) {
+        Event temp = new Event(title, details, date, periodique);
 
         if(!isPresent(temp))
             repository.save(temp);
@@ -40,7 +40,7 @@ public class EventService {
             oldEvent.setDetails(event.getDetails());
             oldEvent.setDate(event.getDate());
         }
-        oldEvent.setIsValided(event.getIsValided());
+        oldEvent.setIsValided(updateValid);
 
         repository.save(oldEvent); //! checker si ça écrase bien l'autre
     }

@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Proxy(lazy = false)
 @Entity
 public class Event {
     @Id
@@ -20,12 +22,15 @@ public class Event {
     private Date date;
     private boolean isValided=false;
 
+    private boolean periodique=false;
+
     public Event() { }
 
-    public Event(String title, String details,Date date) {
+    public Event(String title, String details,Date date,boolean periodique) {
         this.title = title;
         this.details = details;
         this.date = date;
+        this.periodique = periodique;
     }
 
     public Long getId() {
@@ -66,5 +71,13 @@ public class Event {
 
     public void setIsValided(Boolean isValided) {
         this.isValided = isValided;
+    }
+
+    public Boolean getPeriodique() {
+        return periodique;
+    }
+
+    public void setPeriodique(Boolean periodique) {
+        this.periodique = periodique;
     }
 }
