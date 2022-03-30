@@ -37,6 +37,6 @@ public class RegisterController {
         // }
         this.userEntityService.create(username, new BCryptPasswordEncoder().encode(password));
 
-        return "redirect:/login";
+        return "redirect:/login"; //test
 	}
 }
