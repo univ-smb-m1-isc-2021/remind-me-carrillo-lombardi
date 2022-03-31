@@ -22,6 +22,8 @@ Bonus :
 <br>
 <br>
 
+## faut ranger les fichiers !!!!!!!!!!! (c'est pour que j'y pense)
+
 Commandes:
 
 sudo systemctl start docker.service

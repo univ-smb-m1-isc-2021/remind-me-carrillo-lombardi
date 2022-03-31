@@ -19,7 +19,7 @@ public class RegisterController {
     }
 
     @GetMapping(value = "/register")
-    public String login() {
+    public String register() {
         return "register";
     }
 

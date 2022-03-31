@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form action="#" th:action="@{/import}" method="post">
+        <label th:utext="#{label.importP}"></label>
+        <button type="submit" th:text="Import"></button>
+    </form>
+    <form action="#" th:action="@{/export}" method="post">
+        <label th:utext="#{label.exportP}"></label>
+        <button type="submit" th:text="Export"></button>
+    </form>
+    <form action="#" th:action="@{/delete/user}" method="post">
+        <label th:utext="#{label.deleteP}"></label>
+        <button type="submit" th:text="Delete"></button>
+    </form>
+</body>
+</html>
