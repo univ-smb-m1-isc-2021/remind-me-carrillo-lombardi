@@ -26,17 +26,15 @@ public class ProfilController {
 
 
     private final EventService eventService;
-	
-    public ProfilController(EventService eventService) {
-        this.eventService = eventService;
-    }
-
-    @GetMapping(value = "/profil")
     private final UserEntityService userEntityService;
 	
-    public ProfilController(UserEntityService userEntityService) {
+    public ProfilController(EventService eventService,UserEntityService userEntityService) {
+        this.eventService = eventService;
         this.userEntityService = userEntityService;
     }
+
+    
+
 
     @GetMapping(value = "/admin/profil")
     public String profil() {
