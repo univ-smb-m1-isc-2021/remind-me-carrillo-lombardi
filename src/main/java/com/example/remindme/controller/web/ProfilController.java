@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import com.example.remindme.classes.FormWrapper;
 import com.example.remindme.classes.persistence.Event;
+
+import com.example.remindme.classes.persistence.UserEntity;
+
 import com.example.remindme.controller.web.service.EventService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,8 +16,6 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import com.example.remindme.controller.web.service.UserEntityService;
-
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
-
 @Controller
 public class ProfilController {
 
@@ -45,15 +44,12 @@ public class ProfilController {
         
     }
 
-    
-
-
     @GetMapping(value = "/admin/profil")
     public String profil() {
         return "profil";
     }
 
-    @PostMapping(value = "/profil/export")
+    @PostMapping(value = "/admin/profil/export")
 	public ResponseEntity<InputStreamResource> jsonExport() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         byte[] buf = mapper.writeValueAsBytes(eventService.events());
@@ -67,6 +63,7 @@ public class ProfilController {
             .body(new InputStreamResource(new ByteArrayInputStream(buf)));
 	}
 
+
     // @RequestMapping(value = "/profil/import", method = RequestMethod.POST)
     // @ResponseBody
     // public String uploadFile(@RequestParam("file") MultipartFile file) {
@@ -74,7 +71,7 @@ public class ProfilController {
     
     //     return "admin";
     // }
-    @PostMapping("/profil/import")
+    @PostMapping("/admin/profil/import")
     public ResponseEntity<?> multiUploadFileModel(@ModelAttribute FormWrapper model) throws IOException {
         try {
             // Save as you want as per requiremens
@@ -102,10 +99,10 @@ public class ProfilController {
     //https://stackoverflow.com/questions/13389444/creating-a-java-session
 
     //checker si application.properties nécessaire
-    // @GetMapping(value = "/admin/profil/delete")
-    // @ResponseStatus(HttpStatus.NO_CONTENT)
-    // public String deleteProfil(HttpSession session) {
-    //     session.getAttribute("user")
-    //     this.userEntityService.delete();
-    // }
+    @GetMapping(value = "/admin/profil/delete")
+    public String deleteProfil(HttpSession session) {
+        UserEntity userEntity = userEntityService.findByName(session.getAttribute("userName").toString());
+        this.userEntityService.delete(userEntity.getId());
+        return "redirect:/login";
+    }
 }

@@ -22,6 +22,9 @@ Bonus :
 <br>
 <br>
 
+http://www.plantuml.com/plantuml/uml/JOzD3e8m44Rtd6BMtNW192IM5I29HEDsAbKdeLD2MvNRInjDMCsRlFd9LpgFipV4Wy4f4o2r8kHC23Yhm3wi9A0X3XzeYNrgwx1H6wvb1KTjqtRJoYhMtexBSAqJUescwoEUq4tn3xp9Fm7XfUS5HiiFO3Gw7SjT4QUCkkKxLy2-WAvl3rkrtEclBdOCXcnMwZN7ByiN
+
+
 ## faut ranger les fichiers !!!!!!!!!!! (c'est pour que j'y pense)
 
 Commandes:
@@ -35,7 +38,16 @@ mvn verify spring-boot:run
 http://localhost:8080/home
 http://localhost:5050 --> pgadmin: post@gres.sql password
 
-http://www.plantuml.com/plantuml/uml/JOzD3e8m44Rtd6BMtNW192IM5I29HEDsAbKdeLD2MvNRInjDMCsRlFd9LpgFipV4Wy4f4o2r8kHC23Yhm3wi9A0X3XzeYNrgwx1H6wvb1KTjqtRJoYhMtexBSAqJUescwoEUq4tn3xp9Fm7XfUS5HiiFO3Gw7SjT4QUCkkKxLy2-WAvl3rkrtEclBdOCXcnMwZN7ByiN
+TODO
+    quand créer compte syncroniser avec login
+
+Problème
+    quand change de page on perd la langue --> session ?
+
+
+
+Connexion exemple:
+https://www.concretepage.com/spring/spring-security/spring-security-in-memory-authentication
 
 Projet Spring pour s'inspirer:
 https://github.com/joerodriguez/spring-boot-todo-example/tree/master/src/main/java/com/github/joerodriguez/springbootexample

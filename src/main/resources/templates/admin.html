@@ -9,10 +9,12 @@
     <h2 data-th-text="#{label.congrat}"></h2>
 
     <div>
-        <a th:href="@{/admin?lang=en}">Login (English)</a>
+        <a th:href="@{/admin?lang=en}">English</a>
         &nbsp;|&nbsp;
-        <a th:href="@{/admin?lang=fr}">Login (French)</a>
-     </div>
+        <a th:href="@{/admin?lang=fr}">French</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/admin/profil}" th:text="#{label.profil}"></a>
+    </div>
 
     <table>
         <thead>
