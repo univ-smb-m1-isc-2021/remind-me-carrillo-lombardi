@@ -5,16 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <form action="#" th:action="@{/profil/import}" method="post">
+    <form action="#" th:action="@{/admin/profil/import}" method="post">
         <label th:utext="#{label.importP}"></label>
         <input type="file" name="file" /></td>
         <button type="submit" th:text="Import"></button>
     </form>
-    <form action="#" th:action="@{/profil/export}" method="post">
+    <form action="#" th:action="@{/admin/profil/export}" method="post">
         <label th:utext="#{label.exportP}"></label>
         <button type="submit" th:text="Export"></button>
     </form>
-    <form action="#" th:action="@{/profil/delete/user}" method="post">
+    <form action="#" th:action="@{/admin/profil/delete}" method="get">
         <label th:utext="#{label.deleteP}"></label>
         <button type="submit" th:text="Delete"></button>
     </form>

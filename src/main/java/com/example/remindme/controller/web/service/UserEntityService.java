@@ -20,6 +20,10 @@ public class UserEntityService {
         return repository.findAll();
     }
 
+    public UserEntity findByName(String name) {
+        return repository.findByName(name);
+    }
+
     public void delete(Long userEntityId) {
         Optional<UserEntity> userEntity = repository.findById(userEntityId);
         userEntity.ifPresent(repository::delete);
