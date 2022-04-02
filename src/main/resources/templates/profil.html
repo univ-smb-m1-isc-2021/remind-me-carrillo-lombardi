@@ -5,12 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <form action="#" th:action="@{/profil/import}" method="post">
-        <label th:utext="#{label.importP}"></label>
-        <input type="file" name="file" /></td>
-        <button type="submit" th:text="Import"></button>
+    <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/profil/import}">
+        <input type="text" name="title"/><br/>
+        <input type="text" name="description"/><br/><br/>
+        <input type="file" name="image"/><br/><br/>
+        <input type="submit" value="Submit" id="btnSubmit"/>
     </form>
-    <form action="#" th:action="@{/profil/export}" method="post">
+    
+    <form action="#" th:action="@{/profil/export}"  method="post">
         <label th:utext="#{label.exportP}"></label>
         <button type="submit" th:text="Export"></button>
     </form>
