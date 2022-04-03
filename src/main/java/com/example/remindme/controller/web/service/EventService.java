@@ -32,6 +32,16 @@ public class EventService {
         if(!isPresent(temp))
             repository.save(temp);
     }
+    public void createAll(List<Event> events) {
+        for (Event e : events) {
+            Event temp = new Event(e.getTitle(), e.getDetails(), e.getDate(), e.getPeriodique());
+
+            if(!isPresent(temp))
+                repository.save(temp);
+        }
+        
+    }
+
 
     public void update(Long eventId,Event event,Boolean updateValid) {
         Event oldEvent = repository.getById(eventId);

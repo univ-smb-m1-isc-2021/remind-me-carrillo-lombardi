@@ -2,6 +2,8 @@ package com.example.remindme.controller.web;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import com.example.remindme.classes.FormWrapper;
 import com.example.remindme.classes.persistence.Event;
@@ -73,27 +75,19 @@ public class ProfilController {
     //     return "admin";
     // }
     @PostMapping("/admin/profil/import")
-    public ResponseEntity<?> multiUploadFileModel(@ModelAttribute FormWrapper model) throws IOException {
-        try {
-            // Save as you want as per requiremens
-            saveUploadedFile(model.getImage());
-            //formRepo.save(mode.getTitle(), model.getDescription());
-        } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        System.out.println("IM INNNNNNNNNNNNNNNNNNNNNNNNNNNN");
-        System.out.println(new String(model.getImage().getBytes()));
+    public String multiUploadFileModel(@ModelAttribute FormWrapper model) throws IOException {
 
-        return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
+        //transform bytes to string 
+        String s = new String(model.getImage().getBytes());
+        //Transforme string to events
+        ObjectMapper mapper = new ObjectMapper();
+        List<Event> events = Arrays.asList(mapper.readValue(s, Event[].class));
+
+        eventService.createAll(events);
+
+        return "redirect:/admin/profil";
     }
 
-    private void saveUploadedFile(MultipartFile file) throws IOException {
-        /*if (!file.isEmpty()) {
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
-        }*/
-    }
 
     //https://docs.spring.io/spring-session/reference/guides/boot-redis.html
     //https://docs.spring.io/spring-session/reference/

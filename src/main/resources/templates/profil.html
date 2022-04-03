@@ -6,10 +6,8 @@
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/admin/profil/import}">
-        <input type="text" name="title"/><br/>
-        <input type="text" name="description"/><br/><br/>
         <input type="file" name="image"/><br/><br/>
-        <input type="submit" value="Submit" id="btnSubmit"/>
+        <input type="submit" value="Import" id="btnSubmit"/>
     </form>
     <form action="#" th:action="@{/admin/profil/export}" method="post">
         <label th:utext="#{label.exportP}"></label>

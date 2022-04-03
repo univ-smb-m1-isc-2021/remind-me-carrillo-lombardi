@@ -11,7 +11,7 @@ Fonctionnalités :
 - [x] Une notification peut être validée, stoppant l'envoi de notification pour cet événement.
 - [x] Un événement peut être défini comme périodique (un anniversaire, une fête) ou une fois seulement.
 - [ ] Ma homepage me montre, classée par ordre de distance les notifications à venir.
-- [ ] Je peux importer / exporter un fichier de notifications.
+- [x] Je peux importer / exporter un fichier de notifications.
 
 Bonus :
 
