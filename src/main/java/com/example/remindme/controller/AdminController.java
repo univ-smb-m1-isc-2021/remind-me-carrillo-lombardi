@@ -30,9 +30,6 @@ public class AdminController {
 		UserEntity userEntity = userEntityService.findByName(authentication.getName());
 		session.setAttribute("userId", userEntity.getId());
 
-		System.out.println("!!!!!!!!!!!!!!!\n!!!!!!!!!!");
-        System.out.println(userEntity.getId());
-
 		if(lang != null && !lang.equals("")) {
 			session.setAttribute("lang", lang);
 		} else {

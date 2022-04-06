@@ -41,6 +41,7 @@ http://localhost:5050 --> pgadmin: post@gres.sql password
 TODO
     quand créer compte syncroniser avec login
     Un moyen de se déconnecter ? --> pour l'instant quand on retourne sur login ça nettoie le session id
+    Fusionner home + admin
 
 Problemes
 
