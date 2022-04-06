@@ -25,9 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        if(userEntityService.users().isEmpty())
-            System.out.println("No users");
-
         // System.out.println("\nDans connexion\n\n");
         // for (UserEntity elem : userEntityService.users()) {
         //     System.out.println(elem.getName());

@@ -33,7 +33,6 @@ public class ProfilController {
     public ProfilController(EventService eventService,UserEntityService userEntityService) {
         this.eventService = eventService;
         this.userEntityService = userEntityService;
-        
     }
 
     @GetMapping(value = "/admin/profil")
@@ -74,7 +73,7 @@ public class ProfilController {
     //     return "admin";
     // }
     @PostMapping("/admin/profil/import")
-    public String multiUploadFileModel(@ModelAttribute FormWrapper model) throws IOException {
+    public String multiUploadFileModel(@ModelAttribute FormWrapper model, HttpSession session) throws IOException {
 
         //transform bytes to string 
         String s = new String(model.getImage().getBytes());
@@ -82,21 +81,15 @@ public class ProfilController {
         ObjectMapper mapper = new ObjectMapper();
         List<Event> events = Arrays.asList(mapper.readValue(s, Event[].class));
 
-        eventService.createAll(events);
+        eventService.createAll(events, (Long)(session.getAttribute("userId")));
 
         return "redirect:/admin/profil";
     }
 
-
-    //https://docs.spring.io/spring-session/reference/guides/boot-redis.html
-    //https://docs.spring.io/spring-session/reference/
-    //https://stackoverflow.com/questions/13389444/creating-a-java-session
-
     //checker si application.properties nécessaire
     @GetMapping(value = "/admin/profil/delete")
     public String deleteProfil(HttpSession session) {
-        UserEntity userEntity = userEntityService.findByName(session.getAttribute("userName").toString());
-        this.userEntityService.delete(userEntity.getId());
+        this.userEntityService.delete((Long)(session.getAttribute("userId")));
         return "redirect:/login";
     }
 }

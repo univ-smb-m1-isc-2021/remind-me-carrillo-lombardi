@@ -47,7 +47,7 @@ public class EventController {
     @PostMapping(value="/event/create")
 	public String createEvent(@ModelAttribute Event event, Model model) {
         //TODO faire en meme temps les notifs
-		eventService.create(event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique());
+		eventService.create(event.getUserId(), event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique());
         // System.out.println( dateFormat.format(event.getDate()));
         // System.out.println( event.getPeriodique());
         return "redirect:/admin";//TODO a cahnger par home quand les test seront finis

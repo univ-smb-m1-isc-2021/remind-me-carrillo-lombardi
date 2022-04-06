@@ -16,6 +16,7 @@ public class Event {
     @GeneratedValue
     private Long id;
 
+    private Long userId;
     private String title;
     private String details; //a finir
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -26,11 +27,20 @@ public class Event {
 
     public Event() { }
 
-    public Event(String title, String details,Date date,boolean periodique) {
+    public Event(Long userId, String title, String details,Date date,boolean periodique) {
+        this.userId = userId;
         this.title = title;
         this.details = details;
         this.date = date;
         this.periodique = periodique;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

@@ -24,8 +24,8 @@ class Initializer {
         eRep.deleteAllInBatch();
 
         if (eRep.findAll().isEmpty()) {
-            eRep.saveAndFlush(new Event("Event 1", "description hyper poussé", new Date(), false));
-            eRep.saveAndFlush(new Event("Event 2", "non je suis quand meme pas sur la bdd ?!", new Date(), false));
+            eRep.saveAndFlush(new Event(1l,"Event 1", "description hyper poussé", new Date(), false));
+            eRep.saveAndFlush(new Event(1l,"Event 2", "non je suis quand meme pas sur la bdd ?!", new Date(), false));
         }
 
         uRep.deleteAllInBatch();

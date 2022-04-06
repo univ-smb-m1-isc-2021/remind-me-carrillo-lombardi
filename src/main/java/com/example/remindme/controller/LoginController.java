@@ -18,7 +18,7 @@ public class LoginController {
     @GetMapping(value = "/login")
     public String login(HttpSession session, @RequestParam(required = false) String lang) {
 
-        session.removeAttribute("userName");
+        session.removeAttribute("userId");
 
         if(lang != null && !lang.equals("")) {
 			session.setAttribute("lang", lang);

@@ -9,6 +9,8 @@
         <a th:href="@{/admin/profil?lang=en}">English</a>
         &nbsp;|&nbsp;
         <a th:href="@{/admin/profil?lang=fr}">French</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/admin}" th:text="#{label.home}"></a>
     </div>
     <h1 th:utext="#{label.profil}"></h1>
     <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/admin/profil/import}">
