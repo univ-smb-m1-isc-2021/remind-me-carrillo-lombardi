@@ -38,11 +38,9 @@ http://localhost:5050 --> pgadmin: post@gres.sql password
 TODO
     transformer le admin en home ? ou un autre terme
     affichage plus propre
-    meilleur affichage pour le "chaque année"
 
 Problemes
     quand créer compte syncroniser avec login
-
 
 Nettoyer les imports : Alt+shift+O
 

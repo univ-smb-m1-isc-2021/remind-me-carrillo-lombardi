@@ -1,17 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Getting Started: Serving Web Content</title> 
+    <title th:text="#{label.adminPage}"></title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1 th:utext="#{label.congrat}"></h1>
-    <h2 data-th-text="#{label.congrat}"></h2>
-
     <div>
-        <a th:href="@{/admin?lang=en}">English</a>
+        <a th:href="@{/admin?lang=en}" th:text="#{label.english}"></a>
         &nbsp;|&nbsp;
-        <a th:href="@{/admin?lang=fr}">French</a>
+        <a th:href="@{/admin?lang=fr}" th:text="#{label.french}"></a>
         &nbsp;|&nbsp;
         <a th:href="@{/admin/profil}" th:text="#{label.profil}"></a>
     </div>
@@ -23,7 +20,7 @@
             <th th:text="#{label.title}"></th>
             <th th:text="#{label.details}"></th>
             <th th:text="#{label.date}"></th>
-            <th th:text="#{label.periodique}"></th>
+            <th th:text="#{label.periodical}"></th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +33,7 @@
             <td th:if="${!event.isValided}">
                 <form action="#" th:action="@{/event/validation}" th:object="${evento}" method="post" >
                     <input type="hidden" name="id" th:value="${event.id}"/>
-                    <input type="submit" value="Submit"/>
+                    <button type="submit" th:utext="#{label.validate}"></button>
                 </form>  
             </td>      
         </tr>
@@ -53,11 +50,14 @@
                 <tr><td><input name="details" type="text" size="140" th:field="*{details}"></td>
             </tr>
             <tr>
-                    <td><input name="Date" type="datetime-local" size="140" th:field="*{date}"></td>
+                <td><input name="Date" type="datetime-local" size="140" th:field="*{date}"></td>
             </tr>
-                    <td><input name="periodique" type="checkbox" size="140" th:field="*{periodique}"></td>
+                <td>
+                    <label for="periodique" th:text="#{label.periodical}"></label>
+                    <input name="periodique" type="checkbox" size="140" th:field="*{periodique}" >
+                </td>
             <td>
-                <button type="submit" th:text="Create"></button>
+                <button type="submit" th:text="#{label.create}"></button>
             </td>
             
             </tbody>

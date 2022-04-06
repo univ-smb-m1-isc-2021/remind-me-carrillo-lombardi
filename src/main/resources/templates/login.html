@@ -1,10 +1,14 @@
-<html>
-<head></head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title th:text="#{label.loginPage}"></title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
 <body>
     <div>
-        <a th:href="@{/login?lang=en}">English</a>
+        <a th:href="@{/login?lang=en}" th:text="#{label.english}"></a>
         &nbsp;|&nbsp;
-        <a th:href="@{/login?lang=fr}">French</a>
+        <a th:href="@{/login?lang=fr}" th:text="#{label.french}"></a>
         &nbsp;|&nbsp;
         <a th:href="@{/register}" th:text="#{label.register}"></a>
     </div>
