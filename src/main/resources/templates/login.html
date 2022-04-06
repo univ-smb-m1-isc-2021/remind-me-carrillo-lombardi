@@ -2,12 +2,13 @@
 <head></head>
 <body>
     <div>
-        <a th:href="@{/admin?lang=en}">English</a>
+        <a th:href="@{/login?lang=en}">English</a>
         &nbsp;|&nbsp;
-        <a th:href="@{/admin?lang=fr}">French</a>
+        <a th:href="@{/login?lang=fr}">French</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/register}" th:text="#{label.register}"></a>
     </div>
-    <h1>Login</h1>
-    <a th:href="@{/register}" th:text="#{label.register}"></a>
+    <h1 th:text="#{label.login}"></h1>
     <form name='f' action="perform_login" method='POST'>
         <table>
             <tr>

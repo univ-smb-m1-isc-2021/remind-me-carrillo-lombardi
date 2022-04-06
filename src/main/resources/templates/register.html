@@ -2,12 +2,13 @@
 <head></head>
 <body>
     <div>
-        <a th:href="@{/admin?lang=en}">English</a>
+        <a th:href="@{/register?lang=en}">English</a>
         &nbsp;|&nbsp;
-        <a th:href="@{/admin?lang=fr}">French</a>
+        <a th:href="@{/register?lang=fr}">French</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/login}" th:text="#{label.login}"></a>
     </div>
-    <h1>Register</h1>
-    <a th:href="@{/login}" th:text="#{label.login}"></a>
+    <h1 th:text="#{label.register}"></h1>
     <form action="#" th:action="@{/register/create}" method="post">
         <table>
             <tr>

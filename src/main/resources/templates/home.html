@@ -6,9 +6,9 @@
 </head>
 <body>
     <div>
-        <a th:href="@{/admin?lang=en}">English</a>
+        <a th:href="@{/home?lang=en}">English</a>
         &nbsp;|&nbsp;
-        <a th:href="@{/admin?lang=fr}">French</a>
+        <a th:href="@{/home?lang=fr}">French</a>
     </div>
     <h1>New Fact : </h1>
     <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
