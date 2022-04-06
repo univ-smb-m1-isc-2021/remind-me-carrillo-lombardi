@@ -5,7 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <div>yo mec test sonar </div>
+    <div>
+        <a th:href="@{/admin?lang=en}">English</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/admin?lang=fr}">French</a>
+    </div>
     <h1>New Fact : </h1>
     <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
         <table>

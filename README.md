@@ -4,7 +4,7 @@ But :
     
 Fonctionnalités :
 
-- [ ] application multi-utilisateur (s'enregistrer / supprimer son compte / social login)
+- [x] application multi-utilisateur (s'enregistrer / supprimer son compte / social login)
 - [x] Accessible en Français et en Anglais (détection de la langue du navigateur ET possibilité de forcer une langue)
 - [x] En tant qu'utilisateur, je peux entrer manuellement des événements pour lesquels je souhaite être notifié.
 - [ ] Une notification peut être faite par (mail / sms / whatsapp / discord) a un délai définit par rapport à l'événement. Un même événement peut avoir plusieurs notifications.
@@ -40,11 +40,12 @@ http://localhost:5050 --> pgadmin: post@gres.sql password
 
 TODO
     quand créer compte syncroniser avec login
+    Un moyen de se déconnecter ?
 
-Problème
-    quand change de page on perd la langue --> session ?
+Problemes
 
 
+Nettoyer les imports : Alt+shift+O
 
 Connexion exemple:
 https://www.concretepage.com/spring/spring-security/spring-security-in-memory-authentication

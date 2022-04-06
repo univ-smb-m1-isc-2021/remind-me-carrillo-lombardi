@@ -1,6 +1,8 @@
 package com.example.remindme.controller.web;
 
 
+import javax.servlet.http.HttpSession;
+
 import com.example.remindme.controller.web.service.UserEntityService;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,7 +21,17 @@ public class RegisterController {
     }
 
     @GetMapping(value = "/register")
-    public String register() {
+    public String register(HttpSession session, @RequestParam(required = false) String lang) {
+        if(lang != null && !lang.equals("")) {
+			session.setAttribute("lang", lang);
+		} else {
+            lang = ((String)session.getAttribute("lang"));
+            if(lang != null && !lang.equals("")) {
+                System.out.println("\nlang\n");
+                System.out.println(lang);
+                return "redirect:/register?lang="+lang;
+            }
+        }
         return "register";
     }
 

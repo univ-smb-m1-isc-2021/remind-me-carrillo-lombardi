@@ -1,38 +1,27 @@
 package com.example.remindme.controller.web;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.example.remindme.classes.FormWrapper;
 import com.example.remindme.classes.persistence.Event;
-
 import com.example.remindme.classes.persistence.UserEntity;
-
 import com.example.remindme.controller.web.service.EventService;
+import com.example.remindme.controller.web.service.UserEntityService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import com.example.remindme.controller.web.service.UserEntityService;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class ProfilController {
@@ -48,7 +37,19 @@ public class ProfilController {
     }
 
     @GetMapping(value = "/admin/profil")
-    public String profil() {
+    public String profil(HttpSession session, @RequestParam(required = false) String lang) {
+
+		if(lang != null && !lang.equals("")) {
+			session.setAttribute("lang", lang);
+		} else {
+            lang = ((String)session.getAttribute("lang"));
+            if(lang != null && !lang.equals("")) {
+                System.out.println("\nlang\n");
+                System.out.println(lang);
+                return "redirect:/admin/profil?lang="+lang;
+            }
+        }
+
         return "profil";
     }
 

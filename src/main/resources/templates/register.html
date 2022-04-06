@@ -1,6 +1,11 @@
 <html>
 <head></head>
 <body>
+    <div>
+        <a th:href="@{/admin?lang=en}">English</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/admin?lang=fr}">French</a>
+    </div>
     <h1>Register</h1>
     <a th:href="@{/login}" th:text="#{label.login}"></a>
     <form action="#" th:action="@{/register/create}" method="post">
