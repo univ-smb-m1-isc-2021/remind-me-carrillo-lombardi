@@ -21,17 +21,20 @@ class Initializer {
     @PostConstruct
     public void initialize() {
 
+        uRep.deleteAllInBatch();
+        Long id = 1l;
+
+        if (uRep.findAll().isEmpty()) {
+            UserEntity ue = new UserEntity("a", new BCryptPasswordEncoder().encode("a"));
+            id = ue.getId();
+            uRep.saveAndFlush(ue);
+        }
+
         eRep.deleteAllInBatch();
 
         if (eRep.findAll().isEmpty()) {
-            eRep.saveAndFlush(new Event(1l,"Event 1", "description hyper poussé", new Date(), false));
-            eRep.saveAndFlush(new Event(1l,"Event 2", "non je suis quand meme pas sur la bdd ?!", new Date(), false));
-        }
-
-        uRep.deleteAllInBatch();
-
-        if (uRep.findAll().isEmpty()) {
-            uRep.saveAndFlush(new UserEntity("a", new BCryptPasswordEncoder().encode("a")));
+            eRep.saveAndFlush(new Event(id,"Event 1", "description hyper poussé", new Date(), false));
+            eRep.saveAndFlush(new Event(id,"Event 2", "non je suis quand meme pas sur la bdd ?!", new Date(), false));
         }
     }
 

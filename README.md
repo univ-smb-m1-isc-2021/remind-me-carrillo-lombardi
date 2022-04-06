@@ -38,6 +38,7 @@ http://localhost:5050 --> pgadmin: post@gres.sql password
 TODO
     transformer le admin en home ? ou un autre terme
     affichage plus propre
+    remplir email dans profile / register
 
 Problemes
     quand créer compte syncroniser avec login
