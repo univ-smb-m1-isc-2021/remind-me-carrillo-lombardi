@@ -41,6 +41,7 @@ public class AdminController {
 		model.addAttribute("events", eventService.eventsOfUser(userEntity.getId()));
 
 		model.addAttribute("evento", new Event());
+		model.addAttribute("event", new Event());
 		return "admin";
 	}
 

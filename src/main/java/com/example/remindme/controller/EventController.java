@@ -12,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import com.example.remindme.classes.persistence.Event;
 import com.example.remindme.service.EventService;
@@ -39,16 +40,16 @@ public class EventController {
 
 		eventService.update(event.getId(),event,true);
         
-        return "redirect:/admin";//TODO a cahnger par home quand les test seront finis
+        return "redirect:/admin";
 	}
 
 
 
     @PostMapping(value="/event/create")
-	public String createEvent(@ModelAttribute Event event, Model model) {
+	public String createEvent(@ModelAttribute Event event, Model model, HttpSession session) {
         //TODO faire en meme temps les notifs
-		eventService.create(event.getUserId(), event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique());
-        return "redirect:/admin";//TODO a cahnger par home quand les test seront finis
+		eventService.create((Long)(session.getAttribute("userId")), event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique());
+        return "redirect:/admin";
 	}
 
 
