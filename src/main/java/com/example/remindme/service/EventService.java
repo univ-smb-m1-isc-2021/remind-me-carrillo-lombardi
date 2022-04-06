@@ -30,6 +30,7 @@ public class EventService {
                 list.add(event);
             }
         }
+        list.sort((e1, e2) -> e1.getDate().compareTo(e2.getDate()));
         return list;
     }
 

@@ -10,7 +10,7 @@ Fonctionnalités :
 - [ ] Une notification peut être faite par (mail / sms / whatsapp / discord) a un délai définit par rapport à l'événement. Un même événement peut avoir plusieurs notifications.
 - [x] Une notification peut être validée, stoppant l'envoi de notification pour cet événement.
 - [x] Un événement peut être défini comme périodique (un anniversaire, une fête) ou une fois seulement.
-- [ ] Ma homepage me montre, classée par ordre de distance les notifications à venir.
+- [x] Ma homepage me montre, classée par ordre de distance les notifications à venir.
 - [x] Je peux importer / exporter un fichier de notifications.
 
 Bonus :
@@ -22,10 +22,7 @@ Bonus :
 <br>
 <br>
 
-http://www.plantuml.com/plantuml/uml/JOzD3e8m44Rtd6BMtNW192IM5I29HEDsAbKdeLD2MvNRInjDMCsRlFd9LpgFipV4Wy4f4o2r8kHC23Yhm3wi9A0X3XzeYNrgwx1H6wvb1KTjqtRJoYhMtexBSAqJUescwoEUq4tn3xp9Fm7XfUS5HiiFO3Gw7SjT4QUCkkKxLy2-WAvl3rkrtEclBdOCXcnMwZN7ByiN
-
-
-## faut ranger les fichiers !!!!!!!!!!! (c'est pour que j'y pense)
+http://www.plantuml.com/plantuml/uml/JOzD3e8m44Rtd6BMtNW192IM5I29HEDsAbKdeLD2MvNRInjDMCsRlFd9LpgFipV4Wy4f4o2r8kHC23Yhm3wi9A0X3XzeYNrgwx1H6wvb1KTjqtRJoYhMtexBSAqJUescwoEUq4tn3xp9Fm7XfUS5HiiFO3Gw7SjT4QUCkkKxLy2-WAvl3rkrtEclBdOCXcnMwZN7ByiN --> mettre une image, pk pas pareil pour les maquettes
 
 Commandes:
 
@@ -39,11 +36,12 @@ http://localhost:8080/home
 http://localhost:5050 --> pgadmin: post@gres.sql password
 
 TODO
-    quand créer compte syncroniser avec login
-    Un moyen de se déconnecter ? --> pour l'instant quand on retourne sur login ça nettoie le session id
-    Fusionner home + admin
+    transformer le admin en home ? ou un autre terme
+    affichage plus propre
+    meilleur affichage pour le "chaque année"
 
 Problemes
+    quand créer compte syncroniser avec login
 
 
 Nettoyer les imports : Alt+shift+O
