@@ -89,8 +89,14 @@ public class UserEntityService implements UserDetailsService {
         System.out.println(user.getPassword().equals(providedPassword));
         System.out.println(user.getPassword().equals(passwordEncoder().encode(providedPassword)));
 
+
+        System.out.println("Suite");
+        System.out.println(passwordEncoder().matches(passwordEncoder().encode(providedPassword), user.getPassword()));
+        System.out.println(passwordEncoder().matches(providedPassword,user.getPassword()));
+
         //if (passwordEncoder.matches(user.getPassword(),passwordEncoder.encode(providedPassword))) {
-        if (user.getPassword().equals(providedPassword)) {
+        //if (user.getPassword().equals(providedPassword)) {
+        if (passwordEncoder().matches(providedPassword,user.getPassword())) {
             return user;
         }
 

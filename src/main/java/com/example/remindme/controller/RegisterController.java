@@ -56,6 +56,7 @@ public class RegisterController {
         if(userEntityService.findByName(username) != null)
             return "redirect:/register";
 
+        //userEntityService.create(username, password, tweeter, email);
         userEntityService.create(username, passwordEncoder.encode(password), tweeter, email);
 
         return "redirect:/login";

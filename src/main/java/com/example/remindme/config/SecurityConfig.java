@@ -48,12 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 String email = (String) authentication.getPrincipal();
                 String providedPassword = (String) authentication.getCredentials();
                 UserEntity user = userService.findAndAuthenticateUser(email, providedPassword);
-                System.out.println(":::::");
-                if (user == null) {
-                    System.out.println("oh no");
-                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
-                }
-                System.out.println("Yes !");
+
                 return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             }
 
