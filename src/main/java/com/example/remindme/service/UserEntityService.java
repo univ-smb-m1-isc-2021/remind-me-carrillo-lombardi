@@ -29,8 +29,8 @@ public class UserEntityService {
         userEntity.ifPresent(repository::delete);
     }
 
-    public void create(String name, String password) {
-        UserEntity temp = new UserEntity(name, password);
+    public void create(String name, String password, String tweeter, String email) {
+        UserEntity temp = new UserEntity(name, password, tweeter, email);
 
         if(!isPresent(temp))
             repository.save(temp);

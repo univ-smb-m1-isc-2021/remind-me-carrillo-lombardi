@@ -1,10 +1,12 @@
 package com.example.remindme;
 
-import org.mockito.ArgumentMatchers;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.example.remindme.classes.persistence.UserEntity;
@@ -16,18 +18,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.ArgumentMatchers.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -45,8 +38,8 @@ public class UserEntityServiceTests {
     @BeforeEach
     public void setUp() {
         userEntityList = new ArrayList<>();
-        userEntity1 = new UserEntity("a","aa");
-        userEntity2 = new UserEntity("b","bb");
+        userEntity1 = new UserEntity("a","aa", "", "");
+        userEntity2 = new UserEntity("b","bb", "", "");
         userEntityList.add(userEntity1);
         userEntityList.add(userEntity2);
     }
@@ -61,15 +54,15 @@ public class UserEntityServiceTests {
     void createAndSaveUserEntity() {
         //stubbing
         when(userEntityRepository.save(any())).thenReturn(userEntity1);
-        userEntityService.create(userEntity1.getName(),userEntity1.getPassword());
+        userEntityService.create(userEntity1.getName(),userEntity1.getPassword(), userEntity1.getTweeter(), userEntity1.getEmail());
         verify(userEntityRepository,times(1)).save(any());
     }
     @Test
     void createisPresent(){
         when(userEntityService.users()).thenReturn(userEntityList);
         //UserEntity newUserEntity1 = new UserEntity(userEntity1.getUserEntityId(), "mauvais title", userEntity1.getDetails(), userEntity1.getDate(), userEntity1.getPeriodique());
-        userEntityService.create(userEntity1.getName(),userEntity1.getPassword());
-        userEntityService.create("faux",userEntity1.getPassword()); // ne save pas
+        userEntityService.create(userEntity1.getName(),userEntity1.getPassword(), userEntity1.getTweeter(), userEntity1.getEmail());
+        userEntityService.create("faux",userEntity1.getPassword(), userEntity1.getTweeter(), userEntity1.getEmail()); // ne save pas
         //donc ne fera un save que une fois
         verify(userEntityRepository,times(1)).save(any());
     }
@@ -79,7 +72,7 @@ public class UserEntityServiceTests {
     void updateUserEntityWithoutValided() {
 
         //Cree nouvel userEntity 
-        UserEntity newUserEntity = new UserEntity(userEntity1.getName(), userEntity1.getPassword());
+        UserEntity newUserEntity = new UserEntity(userEntity1.getName(), userEntity1.getPassword(), userEntity1.getTweeter(), userEntity1.getEmail());
         //Le modifie
         newUserEntity.setName("faux");
         //Simulation 

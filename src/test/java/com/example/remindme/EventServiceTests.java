@@ -1,7 +1,10 @@
 package com.example.remindme;
 
-import org.mockito.ArgumentMatchers;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,18 +19,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.ArgumentMatchers.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -75,7 +69,7 @@ public class EventServiceTests {
     void updateEventWithoutValided() {
 
         //Cree nouvel event 
-        Event newEvent = new Event(event1.getUserId(), event1.getTitle(), event1.getDetails(), event1.getDate(), event1.getPeriodique());
+        Event newEvent = new Event(event1.getUserId(), event1.getTitle(), event1.getDetails(), event1.getDate(), event1.getPeriodique(), event1.getTweeter(), event1.getEmail());
         //Le modifie
         newEvent.setDetails("detailsUpdate");
         newEvent.setTitle("titleUpdate");
@@ -90,7 +84,7 @@ public class EventServiceTests {
     @Test
     void updateEventWithValided() {
         //Cree nouvel event 
-        Event newEvent = new Event(event1.getUserId(), event1.getTitle(), event1.getDetails(), event1.getDate(), event1.getPeriodique());
+        Event newEvent = new Event(event1.getUserId(), event1.getTitle(), event1.getDetails(), event1.getDate(), event1.getPeriodique(), event1.getTweeter(), event1.getEmail());
         //Le modifie
         newEvent.setDetails("detailsUpdate");
         newEvent.setTitle("titleUpdate");
@@ -108,8 +102,8 @@ public class EventServiceTests {
     void createisPresent(){
         when(eventService.events()).thenReturn(eventList);
         //Event newEvent1 = new Event(event1.getUserId(), "mauvais title", event1.getDetails(), event1.getDate(), event1.getPeriodique());
-        eventService.create(event1.getUserId(),event1.getTitle(),event1.getDetails(),event1.getDate(),event1.getPeriodique());
-        eventService.create(event1.getUserId(),"mauvais title",event1.getDetails(),event1.getDate(),event1.getPeriodique()); // ne save pas
+        eventService.create(event1.getUserId(),event1.getTitle(),event1.getDetails(),event1.getDate(),event1.getPeriodique(), event1.getTweeter(), event1.getEmail());
+        eventService.create(event1.getUserId(),"mauvais title",event1.getDetails(),event1.getDate(),event1.getPeriodique(), event1.getTweeter(), event1.getEmail()); // ne save pas
         //donc ne fera un save que une fois
         verify(eventRepository,times(1)).save(any());
     }

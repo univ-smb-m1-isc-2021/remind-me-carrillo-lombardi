@@ -25,7 +25,7 @@ class Initializer {
         Long id = 1l;
 
         if (uRep.findAll().isEmpty()) {
-            UserEntity ue = new UserEntity("a", new BCryptPasswordEncoder().encode("a"));
+            UserEntity ue = new UserEntity("a", new BCryptPasswordEncoder().encode("a"), "", "");
             id = ue.getId();
             uRep.saveAndFlush(ue);
         }

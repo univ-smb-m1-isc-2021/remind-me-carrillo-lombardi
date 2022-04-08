@@ -36,7 +36,9 @@ public class RegisterController {
     @PostMapping(value="/register/create")
 	public String createEvent(@RequestParam(name = "username") String username,
                         @RequestParam(name = "password") String password,
-                        @RequestParam(name = "password2") String password2) {
+                        @RequestParam(name = "password2") String password2,
+                        @RequestParam(name = "tweeter") String tweeter,
+                        @RequestParam(name = "email") String email) {
 
         if(!password.equals(password2))
             return "redirect:/register";
@@ -44,7 +46,7 @@ public class RegisterController {
         if(userEntityService.findByName(username) != null)
             return "redirect:/register";
 
-        this.userEntityService.create(username, new BCryptPasswordEncoder().encode(password));
+        this.userEntityService.create(username, new BCryptPasswordEncoder().encode(password), tweeter, email);
 
         return "redirect:/login";
 	}

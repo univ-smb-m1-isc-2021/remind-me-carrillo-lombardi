@@ -12,14 +12,18 @@ public class UserEntity { //UserEntitylass I change the nmae cause of mysql (Use
 
     private String name;
     private String password;
+    private String tweeter;
+    private String email;
 
     public UserEntity() {
         
     }
 
-    public UserEntity(String name, String password) {
+    public UserEntity(String name, String password, String tweeter, String email) {
         this.name = name;
         this.password = password;
+        this.tweeter = tweeter;
+        this.email = email;
     }
 
     public Long getId() {
@@ -44,5 +48,21 @@ public class UserEntity { //UserEntitylass I change the nmae cause of mysql (Use
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTweeter() {
+        return tweeter;
+    }
+
+    public void setTweeter(String tweeter) {
+        this.tweeter = tweeter;
     }
 }
