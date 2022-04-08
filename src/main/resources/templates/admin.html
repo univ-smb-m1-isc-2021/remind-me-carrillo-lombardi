@@ -44,22 +44,37 @@
     <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
         <table>
             <tbody>
-            <tr>
-                <td><input name="title" type="text" size="140" th:field="*{title}"></td>
-            </tr>
-                <tr><td><input name="details" type="text" size="140" th:field="*{details}"></td>
-            </tr>
-            <tr>
-                <td><input name="Date" type="datetime-local" size="140" th:field="*{date}"></td>
-            </tr>
-                <td>
-                    <label for="periodique" th:text="#{label.periodical}"></label>
-                    <input name="periodique" type="checkbox" size="140" th:field="*{periodique}" >
-                </td>
-            <td>
-                <button type="submit" th:text="#{label.create}"></button>
-            </td>
-            
+                <tr>
+                    <td><input name="title" type="text" size="140" th:field="*{title}"></td>
+                </tr>
+                    <tr><td><input name="details" type="text" size="140" th:field="*{details}"></td>
+                </tr>
+                <tr>
+                    <td><input name="Date" type="datetime-local" size="140" th:field="*{date}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email" th:text="#{label.email}"></label>
+                        <input name="email" type="checkbox" size="140" th:field="*{email}" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tweeter" th:text="#{label.tweeter}"></label>
+                        <input name="tweeter" type="checkbox" size="140" th:field="*{tweeter}" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="periodique" th:text="#{label.periodical}"></label>
+                        <input name="periodique" type="checkbox" size="140" th:field="*{periodique}" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" th:text="#{label.create}"></button>
+                    </td>
+                </tr>            
             </tbody>
         </table>
     </form>

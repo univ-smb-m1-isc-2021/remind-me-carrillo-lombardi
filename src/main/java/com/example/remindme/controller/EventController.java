@@ -48,7 +48,7 @@ public class EventController {
     @PostMapping(value="/event/create")
 	public String createEvent(@ModelAttribute Event event, Model model, HttpSession session) {
         //TODO faire en meme temps les notifs
-		eventService.create((Long)(session.getAttribute("userId")), event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique());
+		eventService.create((Long)(session.getAttribute("userId")), event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique(), event.getTweeter(), event.getEmail());
         return "redirect:/admin";
 	}
 

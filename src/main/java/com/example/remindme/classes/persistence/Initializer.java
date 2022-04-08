@@ -21,7 +21,7 @@ class Initializer {
     @PostConstruct
     public void initialize() {
 
-        uRep.deleteAllInBatch();
+        //uRep.deleteAllInBatch();
         Long id = 1l;
 
         if (uRep.findAll().isEmpty()) {
@@ -33,8 +33,8 @@ class Initializer {
         eRep.deleteAllInBatch();
 
         if (eRep.findAll().isEmpty()) {
-            eRep.saveAndFlush(new Event(id,"Event 1", "description hyper poussé", new Date(), false));
-            eRep.saveAndFlush(new Event(id,"Event 2", "non je suis quand meme pas sur la bdd ?!", new Date(), false));
+            eRep.saveAndFlush(new Event(id,"Event 1", "description hyper poussé", new Date(), false, false, false));
+            eRep.saveAndFlush(new Event(id,"Event 2", "non je suis quand meme pas sur la bdd ?!", new Date(), false, false, false));
         }
     }
 

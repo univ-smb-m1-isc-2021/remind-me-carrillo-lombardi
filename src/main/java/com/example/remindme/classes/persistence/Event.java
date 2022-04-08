@@ -24,15 +24,19 @@ public class Event {
     private boolean isValided=false;
 
     private boolean periodique=false;
+    private boolean tweeter=false;
+    private boolean email=false;
 
     public Event() { }
 
-    public Event(Long userId, String title, String details,Date date,boolean periodique) {
+    public Event(Long userId, String title, String details,Date date,boolean periodique, boolean tweeter, boolean email) {
         this.userId = userId;
         this.title = title;
         this.details = details;
         this.date = date;
         this.periodique = periodique;
+        this.tweeter = tweeter;
+        this.email = email;
     }
 
     public Long getUserId() {
@@ -90,4 +94,21 @@ public class Event {
     public void setPeriodique(Boolean periodique) {
         this.periodique = periodique;
     }
+
+    public Boolean getTweeter() {
+        return tweeter;
+    }
+
+    public void setTweeter(Boolean tweeter) {
+        this.tweeter = tweeter;
+    }
+    
+    public Boolean getEmail() {
+        return email;
+    }
+
+    public void setEmail(Boolean periodique) {
+        this.email = periodique;
+    }
+
 }

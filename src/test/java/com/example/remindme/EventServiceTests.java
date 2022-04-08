@@ -45,8 +45,8 @@ public class EventServiceTests {
     @BeforeEach
     public void setUp() {
         eventList = new ArrayList<>();
-        event1 = new Event((long)12, "title", "details", new Date(), false);
-        event2 = new Event((long)13, "title2", "details", new Date(), false);
+        event1 = new Event((long)12, "title", "details", new Date(), false, false, false);
+        event2 = new Event((long)13, "title2", "details", new Date(), false, false, false);
         eventList.add(event1);
         eventList.add(event2);
     }
@@ -61,7 +61,7 @@ public class EventServiceTests {
     void createAndSaveEvent() {
         //stubbing
         when(eventRepository.save(any())).thenReturn(event1);
-        eventService.create(event1.getUserId(),event1.getTitle(),event1.getDetails(),event1.getDate(),event1.getPeriodique());
+        eventService.create(event1.getUserId(),event1.getTitle(),event1.getDetails(),event1.getDate(),event1.getPeriodique(), event1.getTweeter(), event1.getEmail());
         verify(eventRepository,times(1)).save(any());
     }
     @Test

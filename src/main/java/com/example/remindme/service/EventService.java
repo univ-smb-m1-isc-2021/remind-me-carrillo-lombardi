@@ -39,15 +39,15 @@ public class EventService {
         event.ifPresent(repository::delete);
     }
 
-    public void create(Long userId, String title, String details, Date date, Boolean periodique) {
-        Event temp = new Event(userId, title, details, date, periodique);
+    public void create(Long userId, String title, String details, Date date, Boolean periodique, Boolean tweeter, Boolean email) {
+        Event temp = new Event(userId, title, details, date, periodique, tweeter, email);
 
         if(!isPresent(temp))
             repository.save(temp);
     }
     public void createAll(List<Event> events, Long userId) {
         for (Event e : events) {
-            Event temp = new Event(userId, e.getTitle(), e.getDetails(), e.getDate(), e.getPeriodique());
+            Event temp = new Event(userId, e.getTitle(), e.getDetails(), e.getDate(), e.getPeriodique(), e.getTweeter(), e.getEmail());
 
             if(!isPresent(temp))
                 repository.save(temp);
