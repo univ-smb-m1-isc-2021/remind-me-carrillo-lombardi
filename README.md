@@ -45,9 +45,6 @@ Problemes
 
 Nettoyer les imports : Alt+shift+O
 
-Connexion exemple:
-https://www.concretepage.com/spring/spring-security/spring-security-in-memory-authentication
-
 Projet Spring pour s'inspirer:
 https://github.com/joerodriguez/spring-boot-todo-example/tree/master/src/main/java/com/github/joerodriguez/springbootexample
 

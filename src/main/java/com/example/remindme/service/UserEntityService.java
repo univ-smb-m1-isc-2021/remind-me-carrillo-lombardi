@@ -2,15 +2,32 @@ package com.example.remindme.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.remindme.classes.persistence.UserEntity;
 import com.example.remindme.classes.persistence.UserEntityRepository;
 
 @Service
-public class UserEntityService {
+public class UserEntityService implements UserDetailsService {
 
-    private final UserEntityRepository repository;
+    @Autowired
+    UserEntityRepository repository;
+
+    // @Autowired
+    // PasswordEncoder passwordEncoder;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     public UserEntityService(UserEntityRepository repository) {
         this.repository = repository;
@@ -35,9 +52,8 @@ public class UserEntityService {
 
     public void create(String name, String password, String tweeter, String email) {
         UserEntity temp = new UserEntity(name, password, tweeter, email);
-
-        if(!isPresent(temp))
-            repository.save(temp);
+        //temp.setPassword(passwordEncoder().encode(password));
+        repository.save(temp);
     }
 
     public void update(Long userEntityId, String name, String password, String tweeter, String email) {
@@ -50,11 +66,34 @@ public class UserEntityService {
         repository.save(userEntity); //! checker si ça écrase bien l'autre
     }
 
-    private boolean isPresent(UserEntity userEntity) {
-        for (UserEntity elem : users()) {
-            if(elem.getName().equals(userEntity.getName()))
-                return true;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByName(username);
+    }
+
+    public UserEntity findAndAuthenticateUser(String username, String providedPassword) {
+        UserEntity user = repository.findByName(username);
+        if (user == null) {
+            return null;
         }
-        return false;
+
+        System.out.println("user.getPassword()");
+        System.out.println(user.getPassword());
+        System.out.println("passwordEncoder.encode(providedPassword))");
+        System.out.println(passwordEncoder().encode(providedPassword));
+        System.out.println(passwordEncoder().encode(providedPassword));
+        System.out.println(providedPassword);
+
+        System.out.println(passwordEncoder().matches(user.getPassword(),passwordEncoder().encode(providedPassword)));
+        System.out.println(passwordEncoder().matches(user.getPassword(),providedPassword));
+        System.out.println(user.getPassword().equals(providedPassword));
+        System.out.println(user.getPassword().equals(passwordEncoder().encode(providedPassword)));
+
+        //if (passwordEncoder.matches(user.getPassword(),passwordEncoder.encode(providedPassword))) {
+        if (user.getPassword().equals(providedPassword)) {
+            return user;
+        }
+
+        return null;
     }
 }

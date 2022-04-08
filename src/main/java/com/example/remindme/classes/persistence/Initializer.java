@@ -1,6 +1,8 @@
 package com.example.remindme.classes.persistence;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,6 +15,9 @@ class Initializer {
     private final EventRepository eRep;
     private final UserEntityRepository uRep;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public Initializer(EventRepository eRep, UserEntityRepository uRep) {
         this.eRep = eRep;
         this.uRep = uRep;
@@ -24,7 +29,9 @@ class Initializer {
         uRep.deleteAllInBatch();
 
         if (uRep.findAll().isEmpty()) {
-            uRep.saveAndFlush(new UserEntity("a", new BCryptPasswordEncoder().encode("a"), "aTweeter", "a@a.a"));
+            //uRep.saveAndFlush(new UserEntity("a", new BCryptPasswordEncoder().encode("a"), "aTweeter", "a@a.a"));
+            uRep.saveAndFlush(new UserEntity("q", "q", "aTweeter", "a@a.a"));
+            uRep.saveAndFlush(new UserEntity("a", passwordEncoder.encode("a"), "aTweeter", "a@a.a"));
         }
 
         eRep.deleteAllInBatch();

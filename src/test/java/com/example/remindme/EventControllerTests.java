@@ -55,59 +55,59 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 public class EventControllerTests {
-    @Mock
-    private EventService eventService;
-    private Event event;
+    // @Mock
+    // private EventService eventService;
+    // private Event event;
 
-    @InjectMocks
-    private EventController eventController;
+    // @InjectMocks
+    // private EventController eventController;
 
-    @Autowired
-    private MockMvc mockMvc;
+    // @Autowired
+    // private MockMvc mockMvc;
 
-    @BeforeEach
-    public void setup(){
-        event = new Event((long)12, "title", "details", new Date(), false, false, false);
-        mockMvc = MockMvcBuilders.standaloneSetup(eventController).build();
-    }
+    // @BeforeEach
+    // public void setup(){
+    //     event = new Event((long)12, "title", "details", new Date(), false, false, false);
+    //     mockMvc = MockMvcBuilders.standaloneSetup(eventController).build();
+    // }
 
-    @AfterEach
-    void tearDown() {
-        event = null;
-    }
+    // @AfterEach
+    // void tearDown() {
+    //     event = null;
+    // }
 
-    @Test
-    public void PostCreateEvent() throws Exception{
+    // @Test
+    // public void PostCreateEvent() throws Exception{
       
-        mockMvc.perform(post("/event/create").flashAttr("event", event));
-        //null pour l'id car c'est celui de la session en cours
-        verify(eventService,times(1)).create(null,event.getTitle(),event.getDetails(),event.getDate(),event.getPeriodique(),event.getTweeter(),event.getEmail());
-    }
+    //     mockMvc.perform(post("/event/create").flashAttr("event", event));
+    //     //null pour l'id car c'est celui de la session en cours
+    //     verify(eventService,times(1)).create(null,event.getTitle(),event.getDetails(),event.getDate(),event.getPeriodique(),event.getTweeter(),event.getEmail());
+    // }
 
-    @Test
-    public void PostValidationEvent() throws Exception{
+    // @Test
+    // public void PostValidationEvent() throws Exception{
         
-        mockMvc.perform(post("/event/validation").flashAttr("event", event));
-        verify(eventService,times(1)).update(event.getId(), event, true);
-    }
+    //     mockMvc.perform(post("/event/validation").flashAttr("event", event));
+    //     verify(eventService,times(1)).update(event.getId(), event, true);
+    // }
 
-    @Test
-    public void sendable() throws Exception{
+    // @Test
+    // public void sendable() throws Exception{
         
-        assertEquals(eventController.sendable(new Date(), new Date()), true);
-        Date date1 =new Date(2020, 4, 8);
-        Date date2 = new Date(2020, 4, 8, 1, 2);
-        assertEquals(eventController.sendable(date1, date2), false);
+    //     assertEquals(eventController.sendable(new Date(), new Date()), true);
+    //     Date date1 =new Date(2020, 4, 8);
+    //     Date date2 = new Date(2020, 4, 8, 1, 2);
+    //     assertEquals(eventController.sendable(date1, date2), false);
 
-    }
+    // }
 
-    public static String asJsonString(final Object obj){
-        try{
-            return new ObjectMapper().writeValueAsString(obj);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
-    }
+    // public static String asJsonString(final Object obj){
+    //     try{
+    //         return new ObjectMapper().writeValueAsString(obj);
+    //     }catch (Exception e){
+    //         throw new RuntimeException(e);
+    //     }
+    // }
     
 
 
