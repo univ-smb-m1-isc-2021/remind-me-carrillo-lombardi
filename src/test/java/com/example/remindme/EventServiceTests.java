@@ -79,7 +79,6 @@ public class EventServiceTests {
         //Le modifie
         newEvent.setDetails("detailsUpdate");
         newEvent.setTitle("titleUpdate");
-        eventRepository.save(newEvent);
         //Simulation 
         when(eventRepository.getById(event1.getId())).thenReturn(event1);
         when(eventRepository.findByTitle(newEvent.getTitle())).thenReturn(newEvent);
@@ -95,7 +94,6 @@ public class EventServiceTests {
         //Le modifie
         newEvent.setDetails("detailsUpdate");
         newEvent.setTitle("titleUpdate");
-        eventRepository.save(newEvent);
         //Simulation 
         when(eventRepository.getById(event1.getId())).thenReturn(event1);
         when(eventRepository.findByTitle(event1.getTitle())).thenReturn(event1);
