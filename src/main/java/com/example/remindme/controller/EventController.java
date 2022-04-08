@@ -59,14 +59,13 @@ public class EventController {
         sendEmail(event);
     }
     
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 10000)
 	public void reportCurrentTime() {
         List<Event> events = eventService.events();
         for (Event event : events) {
             Date now = new Date();
             if(sendable(now,event.getDate()) && !event.getIsValided()){
                 //sendNotif(event); // TODO FAUDRA Y DECOMMENTER
-                //eventService.delete(event.getId()); // remplacer le delete par rien car faut les conserver je crois mais les valider
                 if(!event.getPeriodique()){
                     eventService.update(event.getId(), event, true);
                 }
@@ -75,7 +74,7 @@ public class EventController {
         }
 	}
 
-    private boolean sendable(Date now, Date date) {
+    public boolean sendable(Date now, Date date) {
         if(now.getYear()!=date.getYear()){
             return false;
         }
