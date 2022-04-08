@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.example.remindme.classes.persistence.Event;
 import com.example.remindme.service.EventService;
+import com.example.remindme.service.UserEntityService;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -27,17 +28,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class EventController {
 
     private final EventService eventService;
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private final UserEntityService userEntityService;
 	
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService,UserEntityService userEntityService) {
         this.eventService = eventService;
+        this.userEntityService = userEntityService;
     }
 
     @PostMapping(value="/event/validation")
 	public String valideEvent(@ModelAttribute Event event, Model model) {
-        //TODO faire en meme temps les notifs
-
 		eventService.update(event.getId(),event,true);
         
         return "redirect:/admin";
@@ -47,7 +47,6 @@ public class EventController {
 
     @PostMapping(value="/event/create")
 	public String createEvent(@ModelAttribute Event event, Model model, HttpSession session) {
-        //TODO faire en meme temps les notifs
 		eventService.create((Long)(session.getAttribute("userId")), event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique(), event.getTweeter(), event.getEmail());
         return "redirect:/admin";
 	}
@@ -56,7 +55,10 @@ public class EventController {
     //a completer
     public void sendNotif(Event event){
         //switch o foreach en fonction des demandes de mails
-        sendEmail(event);
+        if(event.getEmail())
+            sendEmail(event);
+        /*if(event.getTweeter())
+            sendTwetter(event);*/
     }
     
     @Scheduled(fixedRate = 10000)
@@ -96,7 +98,8 @@ public class EventController {
 
     private void sendEmail(Event event){
         // Recipient's email ID needs to be mentioned.
-        String to = "serpiente61@hotmail.fr";
+        //String to = "serpiente61@hotmail.fr";
+        String to = userEntityService.findById(event.getUserId()).getEmail();
 
         // Sender's email ID needs to be mentioned
         String from = "integrationcontinue3@gmail.com";

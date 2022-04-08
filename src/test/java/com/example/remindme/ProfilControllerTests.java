@@ -10,10 +10,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.example.remindme.classes.persistence.Event;
 import com.example.remindme.classes.persistence.EventRepository;
+import com.example.remindme.classes.persistence.UserEntity;
 import com.example.remindme.controller.EventController;
+import com.example.remindme.controller.ProfilController;
 import com.example.remindme.service.EventService;
+import com.example.remindme.service.UserEntityService;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +29,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -54,21 +60,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
-public class EventControllerTests {
+public class ProfilControllerTests {
     @Mock
     private EventService eventService;
     private Event event;
+    private UserEntity user;
+    @Mock
+    private UserEntityService userEntityService;
+    @Mock
+    private HttpSession session;
 
     @InjectMocks
-    private EventController eventController;
+    private ProfilController profilController;
 
     @Autowired
     private MockMvc mockMvc;
 
     @BeforeEach
     public void setup(){
-        event = new Event((long)12, "title", "details", new Date(), false, false, false);
-        mockMvc = MockMvcBuilders.standaloneSetup(eventController).build();
+        user = new UserEntity("title", "details","","");
+        mockMvc = MockMvcBuilders.standaloneSetup(profilController).build();
     }
 
     @AfterEach
@@ -76,40 +87,20 @@ public class EventControllerTests {
         event = null;
     }
 
-    @Test
-    public void PostCreateEvent() throws Exception{
-      
-        mockMvc.perform(post("/event/create").flashAttr("event", event));
-        //null pour l'id car c'est celui de la session en cours
-        verify(eventService,times(1)).create(null,event.getTitle(),event.getDetails(),event.getDate(),event.getPeriodique(),event.getTweeter(),event.getEmail());
+    /*@Test
+    public void PostCreateEventAvecPasLang() throws Exception{
+
+        when(userEntityService.findById(null)).thenReturn(user);
+
+        mockMvc.perform(get("/admin/profil")).andExpect(status().is(200));
+
     }
 
     @Test
-    public void PostValidationEvent() throws Exception{
+    public void PostCreateEventAvecLang() throws Exception{
+
+        when(userEntityService.findById(null)).thenReturn(user);
         
-        mockMvc.perform(post("/event/validation").flashAttr("event", event));
-        verify(eventService,times(1)).update(event.getId(), event, true);
-    }
-
-    @Test
-    public void sendable() throws Exception{
-        Date date0 =new Date(2020, 4, 8,1,2,4);
-        Date date = new Date(2020, 4, 8, 1, 2,3);
-        assertEquals(eventController.sendable(date, date0), true);
-        Date date1 =new Date(2020, 4, 8);
-        Date date2 = new Date(2020, 4, 8, 1, 2);
-        assertEquals(eventController.sendable(date1, date2), false);
-    }
-
-    public static String asJsonString(final Object obj){
-        try{
-            return new ObjectMapper().writeValueAsString(obj);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
-    }
-    
-
-
-
+        mockMvc.perform(get("/admin/profil").param("lang", "fr")).andExpect(status().is(200));
+    }*/
 }
