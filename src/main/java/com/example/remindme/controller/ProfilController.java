@@ -75,8 +75,7 @@ public class ProfilController {
 	}
 
     @PostMapping("/admin/profil/import")
-    public String multiUploadFileModel(@ModelAttribute FormWrapper model, HttpSession session) throws IOException {
-
+    public String multiUploadFileModel(@ModelAttribute("model") FormWrapper model, HttpSession session) throws IOException {
         //transform bytes to string 
         String s = new String(model.getImage().getBytes());
         //Transforme string to events

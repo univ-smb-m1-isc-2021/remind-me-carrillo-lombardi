@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -53,7 +54,7 @@ public class EventController {
 
 
     //a completer
-    public void sendNotif(Event event){
+    public void sendNotif(Event event) throws AddressException, MessagingException{
         //switch o foreach en fonction des demandes de mails
         if(event.getEmail())
             sendEmail(event);
@@ -96,7 +97,7 @@ public class EventController {
     }
 
 
-    private void sendEmail(Event event){
+    private void sendEmail(Event event) throws AddressException, MessagingException{
         // Recipient's email ID needs to be mentioned.
         //String to = "serpiente61@hotmail.fr";
         String to = userEntityService.findById(event.getUserId()).getEmail();
@@ -129,27 +130,23 @@ public class EventController {
 
         // Used to debug SMTP issues
         session.setDebug(true);
+        // Create a default MimeMessage object.
+        MimeMessage message = new MimeMessage(session);
 
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
+        // Set From: header field of the header.
+        message.setFrom(new InternetAddress(from));
 
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
+        // Set To: header field of the header.
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        // Set Subject: header field
+        message.setSubject(event.getTitle());
 
-            // Set Subject: header field
-            message.setSubject(event.getTitle());
+        // Now set the actual message
+        message.setText(event.getDetails());
 
-            // Now set the actual message
-            message.setText(event.getDetails());
+        // Send message
+        Transport.send(message);
 
-            // Send message
-            Transport.send(message);
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
     }
 }

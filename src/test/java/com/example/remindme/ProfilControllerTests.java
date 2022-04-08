@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.remindme.classes.FormWrapper;
 import com.example.remindme.classes.persistence.Event;
 import com.example.remindme.classes.persistence.EventRepository;
 import com.example.remindme.classes.persistence.UserEntity;
@@ -32,6 +33,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -43,6 +47,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -61,6 +66,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 public class ProfilControllerTests {
+    
     @Mock
     private EventService eventService;
     private Event event;
@@ -69,6 +75,8 @@ public class ProfilControllerTests {
     private UserEntityService userEntityService;
     @Mock
     private HttpSession session;
+    @Mock
+    private FormWrapper formWrapper;
 
     @InjectMocks
     private ProfilController profilController;
@@ -76,10 +84,19 @@ public class ProfilControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
+    
+    private MockMultipartFile jsonFile;
+
     @BeforeEach
     public void setup(){
         user = new UserEntity("title", "details","","");
-        mockMvc = MockMvcBuilders.standaloneSetup(profilController).build();
+        jsonFile = new MockMultipartFile("json", "yo", "application/json", "[{\"id\":419,\"userId\":416,\"title\":\"Event 1\",\"details\":\"description hyper poussÃ©\",\"date\":1648981060787,\"isValided\":false,\"periodique\":false,\"tweeter\":false,\"email\":false}]".getBytes());
+        formWrapper = new FormWrapper(jsonFile);
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/jsp/view/");
+        viewResolver.setSuffix(".jsp");
+ 
+        mockMvc = MockMvcBuilders.standaloneSetup(profilController).setViewResolvers(viewResolver).build();
     }
 
     @AfterEach
@@ -87,7 +104,7 @@ public class ProfilControllerTests {
         event = null;
     }
 
-    /*@Test
+    @Test
     public void PostCreateEventAvecPasLang() throws Exception{
 
         when(userEntityService.findById(null)).thenReturn(user);
@@ -102,5 +119,13 @@ public class ProfilControllerTests {
         when(userEntityService.findById(null)).thenReturn(user);
         
         mockMvc.perform(get("/admin/profil").param("lang", "fr")).andExpect(status().is(200));
-    }*/
+    }
+
+    @Test
+    public void PostImportFile() throws Exception{
+        //when(jsonFile.getBytes()).thenReturn(formWrapper.getImage());
+        mockMvc.perform(post("/admin/profil/import").flashAttr("model", formWrapper));
+
+        verify(eventService,times(1)).createAll(anyList(),any());
+    }
 }
