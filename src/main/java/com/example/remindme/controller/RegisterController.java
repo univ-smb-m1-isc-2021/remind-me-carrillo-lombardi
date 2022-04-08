@@ -5,7 +5,8 @@ import javax.servlet.http.HttpSession;
 
 import com.example.remindme.service.UserEntityService;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RegisterController {
 
-    private final UserEntityService userEntityService;
-	
-    public RegisterController(UserEntityService userEntityService) {
-        this.userEntityService = userEntityService;
-    }
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    UserEntityService userEntityService;
 
     @GetMapping(value = "/register")
     public String register(HttpSession session, @RequestParam(required = false) String lang) {
@@ -40,13 +41,15 @@ public class RegisterController {
                         @RequestParam(name = "tweeter") String tweeter,
                         @RequestParam(name = "email") String email) {
 
+        System.out.println("::::Dedans::::");
+
         if(!password.equals(password2))
             return "redirect:/register";
 
         if(userEntityService.findByName(username) != null)
             return "redirect:/register";
 
-        this.userEntityService.create(username, new BCryptPasswordEncoder().encode(password), tweeter, email);
+        userEntityService.create(username, password, tweeter, email);
 
         return "redirect:/login";
 	}

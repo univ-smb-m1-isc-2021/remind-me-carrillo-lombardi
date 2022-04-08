@@ -37,16 +37,13 @@ http://localhost:5050 --> pgadmin: post@gres.sql password
 
 TODO
     transformer le admin en home ? ou un autre terme
+    logout 
+    profile
+    supprimer event quand compte supprimé
     affichage plus propre
-    remplir email dans profile / register
-
-Problemes
-    quand créer compte syncroniser avec login
+    checker https://sonarcloud.io/summary/overall?id=univ-smb-m1-isc-2021_remind-me-carrillo-lombardi
 
 Nettoyer les imports : Alt+shift+O
-
-Connexion exemple:
-https://www.concretepage.com/spring/spring-security/spring-security-in-memory-authentication
 
 Projet Spring pour s'inspirer:
 https://github.com/joerodriguez/spring-boot-todo-example/tree/master/src/main/java/com/github/joerodriguez/springbootexample
