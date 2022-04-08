@@ -11,7 +11,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration 
-public class Config implements WebMvcConfigurer {
+public class LanguageConfig implements WebMvcConfigurer {
 	 
     //save as cookie the language
 	@Bean(name = "localeResolver")
