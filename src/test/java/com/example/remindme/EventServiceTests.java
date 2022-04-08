@@ -24,6 +24,7 @@ import org.mockito.ArgumentMatchers.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -57,10 +58,70 @@ public class EventServiceTests {
     }
 
     @Test
-    void givenEventToAddShouldReturnAddedEvent() {
+    void createAndSaveEvent() {
         //stubbing
         when(eventRepository.save(any())).thenReturn(event1);
         eventService.create(event1.getUserId(),event1.getTitle(),event1.getDetails(),event1.getDate(),event1.getPeriodique());
         verify(eventRepository,times(1)).save(any());
     }
+    @Test
+    void createListEventsAndSaveEvent() {
+        //stubbing
+        eventService.createAll(eventList,event1.getUserId());
+        verify(eventRepository,times(2)).save(any());
+    }
+
+    @Test
+    void updateEventWithoutValided() {
+
+        //Cree nouvel event 
+        Event newEvent = new Event(event1.getUserId(), event1.getTitle(), event1.getDetails(), event1.getDate(), event1.getPeriodique());
+        //Le modifie
+        newEvent.setDetails("detailsUpdate");
+        newEvent.setTitle("titleUpdate");
+        eventRepository.save(newEvent);
+        //Simulation 
+        when(eventRepository.getById(event1.getId())).thenReturn(event1);
+        when(eventRepository.findByTitle(newEvent.getTitle())).thenReturn(newEvent);
+        //Update
+        eventService.update(event1.getId(), newEvent, false);
+        Event verify = eventRepository.findByTitle(event1.getTitle());
+        assertEquals(verify.getTitle(), "titleUpdate");
+    }
+    @Test
+    void updateEventWithValided() {
+        //Cree nouvel event 
+        Event newEvent = new Event(event1.getUserId(), event1.getTitle(), event1.getDetails(), event1.getDate(), event1.getPeriodique());
+        //Le modifie
+        newEvent.setDetails("detailsUpdate");
+        newEvent.setTitle("titleUpdate");
+        eventRepository.save(newEvent);
+        //Simulation 
+        when(eventRepository.getById(event1.getId())).thenReturn(event1);
+        when(eventRepository.findByTitle(event1.getTitle())).thenReturn(event1);
+        //Update avec un true donc title ne change pas
+        eventService.update(event1.getId(), newEvent, true);
+        Event verify = eventRepository.findByTitle(event1.getTitle());
+        assertEquals(verify.getTitle(), "title");
+
+
+    }
+    @Test
+    void createisPresent(){
+        when(eventService.events()).thenReturn(eventList);
+        //Event newEvent1 = new Event(event1.getUserId(), "mauvais title", event1.getDetails(), event1.getDate(), event1.getPeriodique());
+        eventService.create(event1.getUserId(),event1.getTitle(),event1.getDetails(),event1.getDate(),event1.getPeriodique());
+        eventService.create(event1.getUserId(),"mauvais title",event1.getDetails(),event1.getDate(),event1.getPeriodique()); // ne save pas
+        //donc ne fera un save que une fois
+        verify(eventRepository,times(1)).save(any());
+    }
+
+    @Test
+    void eventsOfUser(){
+        when(eventService.events()).thenReturn(eventList);
+        assertEquals(eventService.eventsOfUser((long)12).size(),1);
+    }
+
+
+
 }
