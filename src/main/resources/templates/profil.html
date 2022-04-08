@@ -25,5 +25,12 @@
         <label th:utext="#{label.deleteP}"></label>
         <button type="submit" th:utext="#{label.delete}"></button>
     </form>
+    <form action="#" th:action="@{/admin/profil/update}" method="post">
+        <label th:utext="#{label.tweeter}"></label>
+        <input type="text" th:value="${user.tweeter}" name="tweeter">
+        <label th:utext="#{label.email}"></label>
+        <input type="text" th:value="${user.email}" name="email">
+        <button type="submit" th:utext="#{label.save}"></button>
+    </form>
 </body>
 </html>

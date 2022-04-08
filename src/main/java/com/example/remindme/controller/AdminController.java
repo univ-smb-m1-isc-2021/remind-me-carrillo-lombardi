@@ -30,6 +30,10 @@ public class AdminController {
 		UserEntity userEntity = userEntityService.findByName(authentication.getName());
 		session.setAttribute("userId", userEntity.getId());
 
+		model.addAttribute("events", eventService.eventsOfUser(userEntity.getId()));
+		model.addAttribute("evento", new Event());
+		model.addAttribute("event", new Event());
+
 		if(lang != null && !lang.equals("")) {
 			session.setAttribute("lang", lang);
 		} else {
@@ -38,10 +42,7 @@ public class AdminController {
                 return "redirect:/admin?lang="+lang;
             }
         }
-		model.addAttribute("events", eventService.eventsOfUser(userEntity.getId()));
-
-		model.addAttribute("evento", new Event());
-		model.addAttribute("event", new Event());
+		
 		return "admin";
 	}
 

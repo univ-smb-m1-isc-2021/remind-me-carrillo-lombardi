@@ -24,6 +24,10 @@ public class UserEntityService {
         return repository.findByName(name);
     }
 
+    public UserEntity findById(Long id) {
+        return repository.getById(id);
+    }
+
     public void delete(Long userEntityId) {
         Optional<UserEntity> userEntity = repository.findById(userEntityId);
         userEntity.ifPresent(repository::delete);
@@ -36,10 +40,12 @@ public class UserEntityService {
             repository.save(temp);
     }
 
-    public void update(Long userEntityId, String name, String password) {
+    public void update(Long userEntityId, String name, String password, String tweeter, String email) {
         UserEntity userEntity = repository.getById(userEntityId);
         userEntity.setName(name);
         userEntity.setPassword(password);
+        userEntity.setTweeter(tweeter);
+        userEntity.setEmail(email);
 
         repository.save(userEntity); //! checker si ça écrase bien l'autre
     }
