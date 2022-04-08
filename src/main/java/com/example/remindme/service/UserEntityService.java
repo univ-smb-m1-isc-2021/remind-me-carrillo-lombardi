@@ -2,7 +2,9 @@ package com.example.remindme.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
+import com.example.remindme.classes.persistence.UserEntity;
+import com.example.remindme.classes.persistence.UserEntityRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,17 +14,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.example.remindme.classes.persistence.UserEntity;
-import com.example.remindme.classes.persistence.UserEntityRepository;
 
 @Service
 public class UserEntityService implements UserDetailsService {
 
     @Autowired
     UserEntityRepository repository;
-
-    // @Autowired
-    // PasswordEncoder passwordEncoder;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -52,8 +49,17 @@ public class UserEntityService implements UserDetailsService {
 
     public void create(String name, String password, String tweeter, String email) {
         UserEntity temp = new UserEntity(name, password, tweeter, email);
-        //temp.setPassword(passwordEncoder().encode(password));
-        repository.save(temp);
+        temp.setPassword(passwordEncoder().encode(password));
+        if(!isPresent(temp))
+            repository.save(temp);
+    }
+
+    private boolean isPresent(UserEntity userEntity) {
+        for (UserEntity elem : users()) {
+            if(elem.getName().equals(userEntity.getName()))
+                return true;
+        }
+        return false;
     }
 
     public void update(Long userEntityId, String name, String password, String tweeter, String email) {
@@ -63,7 +69,7 @@ public class UserEntityService implements UserDetailsService {
         userEntity.setTweeter(tweeter);
         userEntity.setEmail(email);
 
-        repository.save(userEntity); //! checker si ça écrase bien l'autre
+        repository.save(userEntity);
     }
 
     @Override
@@ -77,25 +83,6 @@ public class UserEntityService implements UserDetailsService {
             return null;
         }
 
-        System.out.println("user.getPassword()");
-        System.out.println(user.getPassword());
-        System.out.println("passwordEncoder.encode(providedPassword))");
-        System.out.println(passwordEncoder().encode(providedPassword));
-        System.out.println(passwordEncoder().encode(providedPassword));
-        System.out.println(providedPassword);
-
-        System.out.println(passwordEncoder().matches(user.getPassword(),passwordEncoder().encode(providedPassword)));
-        System.out.println(passwordEncoder().matches(user.getPassword(),providedPassword));
-        System.out.println(user.getPassword().equals(providedPassword));
-        System.out.println(user.getPassword().equals(passwordEncoder().encode(providedPassword)));
-
-
-        System.out.println("Suite");
-        System.out.println(passwordEncoder().matches(passwordEncoder().encode(providedPassword), user.getPassword()));
-        System.out.println(passwordEncoder().matches(providedPassword,user.getPassword()));
-
-        //if (passwordEncoder.matches(user.getPassword(),passwordEncoder.encode(providedPassword))) {
-        //if (user.getPassword().equals(providedPassword)) {
         if (passwordEncoder().matches(providedPassword,user.getPassword())) {
             return user;
         }

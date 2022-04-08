@@ -13,7 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class UserEntity implements UserDetails { //UserEntitylass I change the nmae cause of mysql (UserEntity is a reserved keyword)
+public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
@@ -89,17 +89,14 @@ public class UserEntity implements UserDetails { //UserEntitylass I change the n
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return true;
