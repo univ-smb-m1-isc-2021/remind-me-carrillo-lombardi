@@ -70,7 +70,6 @@ public class UserEntityServiceTests {
 
     @Test
     void updateUserEntityWithoutValided() {
-
         //Cree nouvel userEntity 
         UserEntity newUserEntity = new UserEntity(userEntity1.getName(), userEntity1.getPassword(), userEntity1.getTweeter(), userEntity1.getEmail());
         //Le modifie
@@ -79,7 +78,7 @@ public class UserEntityServiceTests {
         when(userEntityRepository.getById(userEntity1.getId())).thenReturn(userEntity1);
         when(userEntityRepository.findByName(newUserEntity.getName())).thenReturn(newUserEntity);
         //Update
-        userEntityService.update(userEntity1.getId(), newUserEntity.getName(), newUserEntity.getPassword());
+        userEntityService.update(userEntity1.getId(), newUserEntity.getName(), newUserEntity.getPassword(), newUserEntity.getTweeter(), newUserEntity.getEmail());
         UserEntity verify = userEntityRepository.findByName(userEntity1.getName());
         assertEquals(verify.getName(), "faux");
     }

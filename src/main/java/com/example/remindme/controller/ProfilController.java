@@ -13,7 +13,7 @@ import com.example.remindme.service.EventService;
 import com.example.remindme.service.UserEntityService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.springframework.ui.Model;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProfilController {
 
-
     private final EventService eventService;
     private final UserEntityService userEntityService;
 	
@@ -36,7 +35,10 @@ public class ProfilController {
     }
 
     @GetMapping(value = "/admin/profil")
-    public String profil(HttpSession session, @RequestParam(required = false) String lang) {
+    public String profil(Model model, HttpSession session, @RequestParam(required = false) String lang) {
+
+        UserEntity user = userEntityService.findById((Long)(session.getAttribute("userId")));
+        model.addAttribute("user", user);
 
 		if(lang != null && !lang.equals("")) {
 			session.setAttribute("lang", lang);
@@ -46,9 +48,17 @@ public class ProfilController {
                 return "redirect:/admin/profil?lang="+lang;
             }
         }
-
         return "profil";
     }
+
+    @PostMapping(value="/admin/profil/update")
+	public String createEvent( HttpSession session, @RequestParam(name = "tweeter") String tweeter, @RequestParam(name = "email") String email) {
+
+        UserEntity user = userEntityService.findById((Long)(session.getAttribute("userId")));
+        userEntityService.update(user.getId(), user.getName(), user.getPassword(), tweeter, email);
+
+        return "redirect:/admin/profil";
+	}
 
     @PostMapping(value = "/admin/profil/export")
 	public ResponseEntity<InputStreamResource> jsonExport() throws JsonProcessingException {
@@ -64,14 +74,6 @@ public class ProfilController {
             .body(new InputStreamResource(new ByteArrayInputStream(buf)));
 	}
 
-
-    // @RequestMapping(value = "/profil/import", method = RequestMethod.POST)
-    // @ResponseBody
-    // public String uploadFile(@RequestParam("file") MultipartFile file) {
-
-    
-    //     return "admin";
-    // }
     @PostMapping("/admin/profil/import")
     public String multiUploadFileModel(@ModelAttribute FormWrapper model, HttpSession session) throws IOException {
 
@@ -86,7 +88,6 @@ public class ProfilController {
         return "redirect:/admin/profil";
     }
 
-    //checker si application.properties nécessaire
     @GetMapping(value = "/admin/profil/delete")
     public String deleteProfil(HttpSession session) {
         this.userEntityService.delete((Long)(session.getAttribute("userId")));
