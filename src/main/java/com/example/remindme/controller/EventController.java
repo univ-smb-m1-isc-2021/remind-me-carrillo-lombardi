@@ -62,7 +62,7 @@ public class EventController {
     }
     
     @Scheduled(fixedRate = 10000)
-	public void reportCurrentTime() {
+	public void checkEventsASend() {
         List<Event> events = eventService.events();
         for (Event event : events) {
             Date now = new Date();

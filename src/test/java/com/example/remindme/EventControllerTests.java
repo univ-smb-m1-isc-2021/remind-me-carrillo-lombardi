@@ -58,6 +58,9 @@ public class EventControllerTests {
     @Mock
     private EventService eventService;
     private Event event;
+    private Event event1;
+    private Event event2;
+    List<Event> eventList;
 
     @InjectMocks
     private EventController eventController;
@@ -68,6 +71,11 @@ public class EventControllerTests {
     @BeforeEach
     public void setup(){
         event = new Event((long)12, "title", "details", new Date(), false, false, false);
+        eventList = new ArrayList<>();
+        event1 = new Event((long)12, "title", "details", new Date(), false, false, false);
+        event2 = new Event((long)13, "title2", "details", new Date(), false, false, false);
+        eventList.add(event1);
+        eventList.add(event2);
         mockMvc = MockMvcBuilders.standaloneSetup(eventController).build();
     }
 
@@ -99,7 +107,37 @@ public class EventControllerTests {
         Date date1 =new Date(2020, 4, 8);
         Date date2 = new Date(2020, 4, 8, 1, 2);
         assertEquals(eventController.sendable(date1, date2), false);
+
+        Date date3 =new Date(2020, 4, 8,1, 0);
+        Date date4 = new Date(2020, 4, 8, 1, 2);
+        assertEquals(eventController.sendable(date3, date4), false);
+
+        Date date5 =new Date(2020, 3, 8,1, 0);
+        Date date6 = new Date(2020, 4, 8, 1, 2);
+        assertEquals(eventController.sendable(date5, date6), false);
+
+        Date date7 =new Date(2020, 4, 7,1, 0);
+        Date date8 = new Date(2020, 4, 8, 1, 2);
+        assertEquals(eventController.sendable(date7, date8), false);
     }
+
+    @Test
+    public void checkEventsASend(){
+        when(eventService.events()).thenReturn(eventList);
+        eventController.checkEventsASend();
+        verify(eventService,times(2)).update(any(), any(), any());
+    }
+    
+    @Test
+    public void checkEventsASend0(){
+        eventList.get(0).setDate(new Date(2000, 2, 2));
+        eventList.get(1).setDate(new Date(2000, 2, 2));
+        when(eventService.events()).thenReturn(eventList);
+        eventController.checkEventsASend();
+        verify(eventService,times(0)).update(any(), any(), any());
+    }
+    
+
 
     public static String asJsonString(final Object obj){
         try{
