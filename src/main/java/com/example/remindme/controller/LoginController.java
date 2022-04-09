@@ -17,6 +17,11 @@ public class LoginController {
         return "redirect:/login";
     }
 
+    @GetMapping(value = "/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
+
     @GetMapping(value = "/login")
     public String login(HttpSession session, @RequestParam(required = false) String lang) {
         

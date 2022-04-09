@@ -11,6 +11,8 @@
         <a th:href="@{/admin/profile?lang=fr}" th:text="#{label.french}"></a>
         &nbsp;|&nbsp;
         <a th:href="@{/admin}" th:text="#{label.home}"></a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/logout}" th:text="#{label.logout}"></a>
     </div>
     <h1 th:utext="#{label.profile}"></h1>
     <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/admin/profile/import}">

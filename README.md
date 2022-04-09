@@ -1,4 +1,5 @@
 # remind-me-carrillo-lombardi
+
 But :
     Réaliser une application multilingue de collecte et d'envoi de notifications
     
@@ -18,37 +19,17 @@ Bonus :
 - [ ] Intégration web ou Android avec l'api Google ou Facebook permettant de récupérer les dates de naissance des contacts et écran de sélection / filtrage
 
 <br>
-<br>
-<br>
-<br>
 
-http://www.plantuml.com/plantuml/uml/JOzD3e8m44Rtd6BMtNW192IM5I29HEDsAbKdeLD2MvNRInjDMCsRlFd9LpgFipV4Wy4f4o2r8kHC23Yhm3wi9A0X3XzeYNrgwx1H6wvb1KTjqtRJoYhMtexBSAqJUescwoEUq4tn3xp9Fm7XfUS5HiiFO3Gw7SjT4QUCkkKxLy2-WAvl3rkrtEclBdOCXcnMwZN7ByiN --> mettre une image, pk pas pareil pour les maquettes
+![alt text](/model/mindmap.png "Mindmap")
 
 Commandes:
-
+```
 sudo systemctl start docker.service
 sudo docker-compose up
 
 docker-compose up
 mvn verify spring-boot:run
-
-http://localhost:8080/home
-http://localhost:5050 --> pgadmin: post@gres.sql password
-
-TODO
-    transformer le admin en home ? ou un autre terme
-    logout 
-    supprimer event quand compte supprimé
-    affichage plus propre
-    checker https://sonarcloud.io/summary/overall?id=univ-smb-m1-isc-2021_remind-me-carrillo-lombardi
-
-Nettoyer les imports : Alt+shift+O
-
-Projet Spring pour s'inspirer:
-https://github.com/joerodriguez/spring-boot-todo-example/tree/master/src/main/java/com/github/joerodriguez/springbootexample
-
-Translation:
-https://o7planning.org/11691/create-a-multi-language-web-application-with-spring-boot
+```
 
 Note :
 Nous avons utilisé l'api Twitter avec twitter4j en libraire java pour pouvoir envoyer la notification en message direct 
@@ -58,3 +39,21 @@ Le code fonctionne mais nous avons cette "erreur"
 
 En regardant, l'api il faut que le compte ait un acces plus éléver et donc il faut faire la demande 
 Malheuresemnt, cette demande n'a pas été encore accepté (probablement dû au fait que le compte a été créer il y a quelque jours)
+
+## Maquette
+
+<br>
+
+![alt text](/model/login.png "Login")
+
+<br>
+
+![alt text](/model/register.png "Register")
+
+<br>
+
+![alt text](/model/index.png "Index")
+
+<br>
+
+![alt text](/model/profile.png "Profil")
