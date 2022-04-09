@@ -60,7 +60,7 @@ public class EventController {
         if(event.getEmail())
             sendEmail(event);
         /*if(event.getTweeter())
-            sendTwetter(event);*/
+            sendTwitter(event);*/
     }
     //Regarde tout les events toutes les [fixedRate] et envoie ceux a envoyer 
     //Ceux envoyer seront valider et donc plus envoyable mais resteront stocker pour avoir un historique
@@ -152,4 +152,30 @@ public class EventController {
         Transport.send(message);
 
     }
+    /**
+        import twitter4j.DirectMessage;
+        import twitter4j.Twitter;
+        import twitter4j.TwitterException;
+        import twitter4j.TwitterFactory;
+        import twitter4j.conf.ConfigurationBuilder;
+
+        public static Twitter getTwitter() {
+            ConfigurationBuilder cb = new ConfigurationBuilder();
+            cb.setDebugEnabled(true)
+            .setOAuthConsumerKey("ZXZOQezJy9JIZH6GqMSQ7uDM0")
+            .setOAuthConsumerSecret("6mnp44f1lUF3ixerC9EChOj0NYw4vlfBVZ9IsfkKUV8Ot274SS")
+            .setOAuthAccessToken("1511641506515505154-y1N7ycw5I0ElzwyUpBvHSfqLCguNZr")
+            .setOAuthAccessTokenSecret("FuEPEPyCtwOcZd6GrOOQCjTIxKtPYaY51GE60Wn85hzxL");
+            TwitterFactory tf = new TwitterFactory(cb.build());
+            Twitter twitter = tf.getInstance();
+            return twitter;
+        }
+        public static String sendTwitter(String recipientName, String msg) 
+        throws TwitterException {
+        
+            Twitter twitter = getTwitter();
+            DirectMessage message = twitter.sendDirectMessage(recipientName, msg);
+            return message.getText();
+        }
+     */
 }
