@@ -24,18 +24,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ProfilController {
+public class ProfileController {
 
     private final EventService eventService;
     private final UserEntityService userEntityService;
 	
-    public ProfilController(EventService eventService,UserEntityService userEntityService) {
+    public ProfileController(EventService eventService,UserEntityService userEntityService) {
         this.eventService = eventService;
         this.userEntityService = userEntityService;
     }
 
-    @GetMapping(value = "/admin/profil")
-    public String profil(Model model, HttpSession session, @RequestParam(required = false) String lang) {
+    @GetMapping(value = "/admin/profile")
+    public String profile(Model model, HttpSession session, @RequestParam(required = false) String lang) {
 
         UserEntity user = userEntityService.findById((Long)(session.getAttribute("userId")));
         model.addAttribute("user", user);
@@ -45,25 +45,25 @@ public class ProfilController {
 		} else {
             lang = ((String)session.getAttribute("lang"));
             if(lang != null && !lang.equals("")) {
-                return "redirect:/admin/profil?lang="+lang;
+                return "redirect:/admin/profile?lang="+lang;
             }
         }
-        return "profil";
+        return "profile";
     }
 
-    @PostMapping(value="/admin/profil/update")
+    @PostMapping(value="/admin/profile/update")
 	public String createEvent( HttpSession session, @RequestParam(name = "tweeter") String tweeter, @RequestParam(name = "email") String email) {
 
         UserEntity user = userEntityService.findById((Long)(session.getAttribute("userId")));
         userEntityService.update(user.getId(), user.getName(), user.getPassword(), tweeter, email);
 
-        return "redirect:/admin/profil";
+        return "redirect:/admin/profile";
 	}
 
-    @PostMapping(value = "/admin/profil/export")
-	public ResponseEntity<InputStreamResource> jsonExport() throws JsonProcessingException {
+    @PostMapping(value = "/admin/profile/export")
+	public ResponseEntity<InputStreamResource> jsonExport(HttpSession session) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        byte[] buf = mapper.writeValueAsBytes(eventService.events());
+        byte[] buf = mapper.writeValueAsBytes(eventService.eventsOfUser((Long)(session.getAttribute("userId"))));
 
         return ResponseEntity
             .ok()
@@ -74,7 +74,7 @@ public class ProfilController {
             .body(new InputStreamResource(new ByteArrayInputStream(buf)));
 	}
 
-    @PostMapping("/admin/profil/import")
+    @PostMapping("/admin/profile/import")
     public String multiUploadFileModel(@ModelAttribute("model") FormWrapper model, HttpSession session) throws IOException {
         //transform bytes to string 
         String s = new String(model.getImage().getBytes());
@@ -84,10 +84,10 @@ public class ProfilController {
 
         eventService.createAll(events, (Long)(session.getAttribute("userId")));
 
-        return "redirect:/admin/profil";
+        return "redirect:/admin/profile";
     }
 
-    @GetMapping(value = "/admin/profil/delete")
+    @GetMapping(value = "/admin/profile/delete")
     public String deleteProfil(HttpSession session) {
         this.userEntityService.delete((Long)(session.getAttribute("userId")));
         return "redirect:/login";

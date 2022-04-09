@@ -17,11 +17,12 @@ public class EventService {
     public EventService(EventRepository repository) {
         this.repository = repository;
     }
-
+    //Renvoie tout les events
     public List<Event> events() {
         return repository.findAll();
     }
-
+    //Recupere la liste des events qui ont le meme userId que l'id passer en parametre
+    //Cet id est celui de l'user actuellement connecter
     public List<Event> eventsOfUser(Long id) {
         List<Event> events = events();
         List<Event> list = new ArrayList<Event>();
@@ -45,15 +46,18 @@ public class EventService {
         if(!isPresent(temp))
             repository.save(temp);
     }
+    //Creer chaque event depuis une liste avec userId qui = id User connecter
     public void createAll(List<Event> events, Long userId) {
         for (Event e : events) {
-            Event temp = new Event(userId, e.getTitle(), e.getDetails(), e.getDate(), e.getPeriodique(), e.getTweeter(), e.getEmail());
+            //Event temp = new Event(userId, e.getTitle(), e.getDetails(), e.getDate(), e.getPeriodique(), e.getTweeter(), e.getEmail());
+            e.setUserId(userId);
 
-            if(!isPresent(temp))
-                repository.save(temp);
+            if(!isPresent(e))
+                repository.save(e);
         }
     }
-
+    //Update les info de l'Event sauf si updateValid = true 
+    //Dans ce cas alors l'event est valider pour ne plus etre utiliser plus tard
     public void update(Long eventId,Event event,Boolean updateValid) {
         Event oldEvent = repository.getById(eventId);
         if(!updateValid){
@@ -65,7 +69,7 @@ public class EventService {
 
         repository.save(oldEvent); //! checker si ça écrase bien l'autre
     }
-
+    //Regarde si un Event est deja present
     private boolean isPresent(Event event) {
         for (Event elem : events()) {
             if(elem.getTitle().equals(event.getTitle()) && elem.getDate().equals(event.getDate()) && elem.getUserId().equals(event.getUserId()))

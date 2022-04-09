@@ -17,7 +17,7 @@ import com.example.remindme.classes.persistence.Event;
 import com.example.remindme.classes.persistence.EventRepository;
 import com.example.remindme.classes.persistence.UserEntity;
 import com.example.remindme.controller.EventController;
-import com.example.remindme.controller.ProfilController;
+import com.example.remindme.controller.ProfileController;
 import com.example.remindme.service.EventService;
 import com.example.remindme.service.UserEntityService;
 
@@ -65,7 +65,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
-public class ProfilControllerTests {
+public class ProfileControllerTests {
     
     @Mock
     private EventService eventService;
@@ -79,7 +79,7 @@ public class ProfilControllerTests {
     private FormWrapper formWrapper;
 
     @InjectMocks
-    private ProfilController profilController;
+    private ProfileController profileController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -96,7 +96,7 @@ public class ProfilControllerTests {
         viewResolver.setPrefix("/WEB-INF/jsp/view/");
         viewResolver.setSuffix(".jsp");
  
-        mockMvc = MockMvcBuilders.standaloneSetup(profilController).setViewResolvers(viewResolver).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(profileController).setViewResolvers(viewResolver).build();
     }
 
     @AfterEach
@@ -109,7 +109,7 @@ public class ProfilControllerTests {
 
         when(userEntityService.findById(null)).thenReturn(user);
 
-        mockMvc.perform(get("/admin/profil")).andExpect(status().is(200));
+        mockMvc.perform(get("/admin/profile")).andExpect(status().is(200));
 
     }
 
@@ -118,13 +118,13 @@ public class ProfilControllerTests {
 
         when(userEntityService.findById(null)).thenReturn(user);
         
-        mockMvc.perform(get("/admin/profil").param("lang", "fr")).andExpect(status().is(200));
+        mockMvc.perform(get("/admin/profile").param("lang", "fr")).andExpect(status().is(200));
     }
 
     @Test
     public void PostImportFile() throws Exception{
         //when(jsonFile.getBytes()).thenReturn(formWrapper.getImage());
-        mockMvc.perform(post("/admin/profil/import").flashAttr("model", formWrapper));
+        mockMvc.perform(post("/admin/profile/import").flashAttr("model", formWrapper));
 
         verify(eventService,times(1)).createAll(anyList(),any());
     }

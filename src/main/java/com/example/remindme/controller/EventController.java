@@ -37,6 +37,7 @@ public class EventController {
         this.userEntityService = userEntityService;
     }
 
+    //Apres l'appuie du bouton valider alors valide l'event ici
     @PostMapping(value="/event/validation")
 	public String valideEvent(@ModelAttribute Event event, Model model) {
 		eventService.update(event.getId(),event,true);
@@ -45,7 +46,7 @@ public class EventController {
 	}
 
 
-
+    //Creer un event depuis un form
     @PostMapping(value="/event/create")
 	public String createEvent(@ModelAttribute Event event, Model model, HttpSession session) {
 		eventService.create((Long)(session.getAttribute("userId")), event.getTitle(), event.getDetails(), event.getDate(),event.getPeriodique(), event.getTweeter(), event.getEmail());
@@ -53,7 +54,7 @@ public class EventController {
 	}
 
 
-    //a completer
+    //Envoie la notif a travers mail/twitter en fonction demande User
     public void sendNotif(Event event) throws AddressException, MessagingException{
         //switch o foreach en fonction des demandes de mails
         if(event.getEmail())
@@ -61,7 +62,8 @@ public class EventController {
         /*if(event.getTweeter())
             sendTwetter(event);*/
     }
-    
+    //Regarde tout les events toutes les [fixedRate] et envoie ceux a envoyer 
+    //Ceux envoyer seront valider et donc plus envoyable mais resteront stocker pour avoir un historique
     @Scheduled(fixedRate = 10000)
 	public void checkEventsASend() {
         List<Event> events = eventService.events();
@@ -76,7 +78,7 @@ public class EventController {
             }
         }
 	}
-
+    //Verifie que [date] soit envoyable en etant egale a Date.now sauf pour les secondes
     public boolean sendable(Date now, Date date) {
         if(now.getYear()!=date.getYear()){
             return false;
@@ -96,16 +98,17 @@ public class EventController {
         return true;
     }
 
-
+    //Construit un message puis envoie le mail
     private void sendEmail(Event event) throws AddressException, MessagingException{
         // Recipient's email ID needs to be mentioned.
         //String to = "serpiente61@hotmail.fr";
+        //Recupere le mail de l'utilsateur de l'event
         String to = userEntityService.findById(event.getUserId()).getEmail();
 
-        // Sender's email ID needs to be mentioned
+        // Boite email de l'app
         String from = "integrationcontinue3@gmail.com";
 
-        // Assuming you are sending email from through gmails smtp
+        // Le serveur pour envoyer les messages
         String host = "smtp.gmail.com";
 
         // Get system properties

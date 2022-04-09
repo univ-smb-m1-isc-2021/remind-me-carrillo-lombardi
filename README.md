@@ -38,7 +38,6 @@ http://localhost:5050 --> pgadmin: post@gres.sql password
 TODO
     transformer le admin en home ? ou un autre terme
     logout 
-    profile
     supprimer event quand compte supprimé
     affichage plus propre
     checker https://sonarcloud.io/summary/overall?id=univ-smb-m1-isc-2021_remind-me-carrillo-lombardi

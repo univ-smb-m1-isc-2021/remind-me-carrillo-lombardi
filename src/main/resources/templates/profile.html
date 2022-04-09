@@ -1,31 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title th:text="#{label.profilPage}"></title> 
+    <title th:text="#{label.profilePage}"></title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
     <div>
-        <a th:href="@{/admin/profil?lang=en}" th:text="#{label.english}"></a>
+        <a th:href="@{/admin/profile?lang=en}" th:text="#{label.english}"></a>
         &nbsp;|&nbsp;
-        <a th:href="@{/admin/profil?lang=fr}" th:text="#{label.french}"></a>
+        <a th:href="@{/admin/profile?lang=fr}" th:text="#{label.french}"></a>
         &nbsp;|&nbsp;
         <a th:href="@{/admin}" th:text="#{label.home}"></a>
     </div>
-    <h1 th:utext="#{label.profil}"></h1>
-    <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/admin/profil/import}">
+    <h1 th:utext="#{label.profile}"></h1>
+    <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/admin/profile/import}">
         <input type="file" name="image"/><br/><br/>
         <button type="submit" th:utext="#{label.import}"></button>
     </form>
-    <form action="#" th:action="@{/admin/profil/export}" method="post">
+    <form action="#" th:action="@{/admin/profile/export}" method="post">
         <label th:utext="#{label.exportP}"></label>
         <button type="submit" th:utext="#{label.export}"></button>
     </form>
-    <form action="#" th:action="@{/admin/profil/delete}" method="get">
+    <form action="#" th:action="@{/admin/profile/delete}" method="get">
         <label th:utext="#{label.deleteP}"></label>
         <button type="submit" th:utext="#{label.delete}"></button>
     </form>
-    <form action="#" th:action="@{/admin/profil/update}" method="post">
+    <form action="#" th:action="@{/admin/profile/update}" method="post">
         <label th:utext="#{label.tweeter}"></label>
         <input type="text" th:value="${user.tweeter}" name="tweeter">
         <label th:utext="#{label.email}"></label>

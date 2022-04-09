@@ -16,9 +16,11 @@ public class Event {
     @GeneratedValue
     private Long id;
 
+    //Pour savoir a quel User il appartient
     private Long userId;
     private String title;
-    private String details; //a finir
+    private String details; 
+    //Format de la date pour le formater automatiquement
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date date;
     private boolean isValided=false;
@@ -38,7 +40,7 @@ public class Event {
         this.tweeter = tweeter;
         this.email = email;
     }
-
+    ///Getter et Setter
     public Long getUserId() {
         return userId;
     }
