@@ -1,6 +1,5 @@
 package com.example.remindme.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -65,12 +64,12 @@ public class EventController {
     //Regarde tout les events toutes les [fixedRate] et envoie ceux a envoyer 
     //Ceux envoyer seront valider et donc plus envoyable mais resteront stocker pour avoir un historique
     @Scheduled(fixedRate = 10000)
-	public void checkEventsASend() {
+	public void checkEventsASend() throws AddressException, MessagingException {
         List<Event> events = eventService.events();
         for (Event event : events) {
             Date now = new Date();
             if(sendable(now,event.getDate()) && !event.getIsValided()){
-                //sendNotif(event); // TODO FAUDRA Y DECOMMENTER
+                sendNotif(event); 
                 if(!event.getPeriodique()){
                     eventService.update(event.getId(), event, true);
                 }
