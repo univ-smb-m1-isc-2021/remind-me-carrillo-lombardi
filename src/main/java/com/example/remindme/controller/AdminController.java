@@ -24,16 +24,20 @@ public class AdminController {
 		this.userEntityService = userEntityService;
     }
 
+	//Page admin
 	@GetMapping(value="/admin")
 	public String home(Model model, Authentication authentication, HttpSession session, @RequestParam(required = false) String lang) {
 
+		//ajout du userId dans la session
 		UserEntity userEntity = userEntityService.findByName(authentication.getName());
 		session.setAttribute("userId", userEntity.getId());
 
+		//Ajout des models pour la page html
 		model.addAttribute("events", eventService.eventsOfUser(userEntity.getId()));
 		model.addAttribute("evento", new Event());
 		model.addAttribute("event", new Event());
 
+		//verification de la langue selectionné par l'utilisateur
 		if(lang != null && !lang.equals("")) {
 			session.setAttribute("lang", lang);
 		} else {

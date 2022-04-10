@@ -3,9 +3,10 @@
 <head> 
     <title th:text="#{label.profilePage}"></title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/main.css" rel="stylesheet">
 </head>
 <body>
-    <div>
+    <div class="menu">
         <a th:href="@{/admin/profile?lang=en}" th:text="#{label.english}"></a>
         &nbsp;|&nbsp;
         <a th:href="@{/admin/profile?lang=fr}" th:text="#{label.french}"></a>
@@ -14,25 +15,33 @@
         &nbsp;|&nbsp;
         <a th:href="@{/logout}" th:text="#{label.logout}"></a>
     </div>
-    <h1 th:utext="#{label.profile}"></h1>
-    <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/admin/profile/import}">
-        <input type="file" name="image"/><br/><br/>
-        <button type="submit" th:utext="#{label.import}"></button>
-    </form>
-    <form action="#" th:action="@{/admin/profile/export}" method="post">
-        <label th:utext="#{label.exportP}"></label>
-        <button type="submit" th:utext="#{label.export}"></button>
-    </form>
-    <form action="#" th:action="@{/admin/profile/delete}" method="get">
-        <label th:utext="#{label.deleteP}"></label>
-        <button type="submit" th:utext="#{label.delete}"></button>
-    </form>
-    <form action="#" th:action="@{/admin/profile/update}" method="post">
-        <label th:utext="#{label.tweeter}"></label>
-        <input type="text" th:value="${user.tweeter}" name="tweeter">
-        <label th:utext="#{label.email}"></label>
-        <input type="text" th:value="${user.email}" name="email">
-        <button type="submit" th:utext="#{label.save}"></button>
-    </form>
+
+    <div class="content">
+        <h1 th:utext="#{label.profile}"></h1>
+        <form action="#" th:action="@{/admin/profile/update}" method="post">
+            <label th:utext="#{label.tweeter}"></label>
+            <input type="text" th:value="${user.tweeter}" name="tweeter">
+            <label th:utext="#{label.email}"></label>
+            <input type="text" th:value="${user.email}" name="email">
+            <button type="submit" th:utext="#{label.save}"></button>
+        </form>
+
+        <form action="#" th:action="@{/admin/profile/delete}" method="get">
+            <label th:utext="#{label.deleteP}"></label>
+            <button type="submit" th:utext="#{label.delete}"></button>
+        </form>
+    </div>
+    
+    <div class="content">
+        <form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="#" th:action="@{/admin/profile/import}">
+            <label th:utext="#{label.importP}"></label>
+            <input type="file" name="image"/><br/><br/>
+            <button type="submit" th:utext="#{label.import}"></button>
+        </form>
+        <form action="#" th:action="@{/admin/profile/export}" method="post">
+            <label th:utext="#{label.exportP}"></label>
+            <button type="submit" th:utext="#{label.export}"></button>
+        </form>
+    </div>
 </body>
 </html>

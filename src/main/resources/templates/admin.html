@@ -3,9 +3,10 @@
 <head> 
     <title th:text="#{label.adminPage}"></title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/main.css" rel="stylesheet">
 </head>
 <body>
-    <div>
+    <div class="menu">
         <a th:href="@{/admin?lang=en}" th:text="#{label.english}"></a>
         &nbsp;|&nbsp;
         <a th:href="@{/admin?lang=fr}" th:text="#{label.french}"></a>
@@ -15,70 +16,59 @@
         <a th:href="@{/logout}" th:text="#{label.logout}"></a>
     </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th th:text="#{label.id}"></th>
-            <th th:text="#{label.title}"></th>
-            <th th:text="#{label.details}"></th>
-            <th th:text="#{label.date}"></th>
-            <th th:text="#{label.periodical}"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}"></td>
-            <td th:text="${event.title}"></td>
-            <td th:text="${event.details}"></td>
-            <td th:text="${event.date}"></td>
-            <td th:text="${event.periodique}"></td>
-            <td th:if="${!event.isValided}">
-                <form action="#" th:action="@{/event/validation}" th:object="${evento}" method="post" >
-                    <input type="hidden" name="id" th:value="${event.id}"/>
-                    <button type="submit" th:utext="#{label.validate}"></button>
-                </form>  
-            </td>      
-        </tr>
-        </tbody>
-    </table>
-
-    <h1 th:text="#{label.newEvent}"></h1>
-    <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
+    <div class="content events">
+        <h1 th:text="#{label.eventsP}"></h1>
         <table>
+            <thead>
+            <tr>
+                <th th:text="#{label.id}"></th>
+                <th th:text="#{label.title}"></th>
+                <th th:text="#{label.details}"></th>
+                <th th:text="#{label.date}"></th>
+                <th th:text="#{label.periodical}"></th>
+                <th th:text="#{label.tweeter}"></th>
+                <th th:text="#{label.email}"></th>
+            </tr>
+            </thead>
             <tbody>
-                <tr>
-                    <td><input name="title" type="text" size="140" th:field="*{title}"></td>
-                </tr>
-                    <tr><td><input name="details" type="text" size="140" th:field="*{details}"></td>
-                </tr>
-                <tr>
-                    <td><input name="Date" type="datetime-local" size="140" th:field="*{date}"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="email" th:text="#{label.email}"></label>
-                        <input name="email" type="checkbox" size="140" th:field="*{email}" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="tweeter" th:text="#{label.tweeter}"></label>
-                        <input name="tweeter" type="checkbox" size="140" th:field="*{tweeter}" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="periodique" th:text="#{label.periodical}"></label>
-                        <input name="periodique" type="checkbox" size="140" th:field="*{periodique}" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit" th:text="#{label.create}"></button>
-                    </td>
-                </tr>            
+            <tr th:each="event : ${events}">
+                <td th:text="${event.id}"></td>
+                <td th:text="${event.title}"></td>
+                <td th:text="${event.details}"></td>
+                <td th:text="${event.date}"></td>
+                <td th:text="${event.periodique}"></td>
+                <td th:text="${event.tweeter}"></td>
+                <td th:text="${event.email}"></td>
+                <td th:if="${!event.isValided}">
+                    <form action="#" th:action="@{/event/validation}" th:object="${evento}" method="post" >
+                        <input type="hidden" name="id" th:value="${event.id}"/>
+                        <button type="submit" th:utext="#{label.validate}"></button>
+                    </form>  
+                </td>      
+            </tr>
             </tbody>
         </table>
-    </form>
+    </div>
+    
+    <div class="content">
+        <h1 th:text="#{label.newEvent}"></h1>
+        <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
+            <label th:text="#{label.titleP}"></label>
+            <input name="title" type="text" th:field="*{title}">
+            <label th:text="#{label.detailP}"></label>
+            <input name="details" type="text" th:field="*{details}">
+            <label th:text="#{label.dateP}"></label>
+            <input name="Date" type="datetime-local" th:field="*{date}">
+            <div>
+                <label for="email" th:text="#{label.email}"></label>
+                <input name="email" type="checkbox" th:field="*{email}" >
+                <label for="tweeter" th:text="#{label.tweeter}"></label>
+                <input name="tweeter" type="checkbox" th:field="*{tweeter}" >
+                <label for="periodique" th:text="#{label.periodical}"></label>
+                <input name="periodique" type="checkbox" th:field="*{periodique}" >
+            </div>
+            <button type="submit" th:text="#{label.create}"></button>
+        </form>
+    </div>
 </body>
 </html>

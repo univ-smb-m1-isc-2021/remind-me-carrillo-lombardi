@@ -37,9 +37,11 @@ public class ProfileController {
     @GetMapping(value = "/admin/profile")
     public String profile(Model model, HttpSession session, @RequestParam(required = false) String lang) {
 
+        //Récupère l'utilisateur a partir de son id (dans la session) pour l'ajouter en model
         UserEntity user = userEntityService.findById((Long)(session.getAttribute("userId")));
         model.addAttribute("user", user);
 
+        //verification de la langue selectionné par l'utilisateur
 		if(lang != null && !lang.equals("")) {
 			session.setAttribute("lang", lang);
 		} else {
@@ -51,6 +53,7 @@ public class ProfileController {
         return "profile";
     }
 
+    //Permet de modifier le profile de l'utilisateur
     @PostMapping(value="/admin/profile/update")
 	public String createEvent( HttpSession session, @RequestParam(name = "tweeter") String tweeter, @RequestParam(name = "email") String email) {
 
@@ -60,6 +63,7 @@ public class ProfileController {
         return "redirect:/admin/profile";
 	}
 
+    //Permet d'exporter les évenement de l'utilisateur
     @PostMapping(value = "/admin/profile/export")
 	public ResponseEntity<InputStreamResource> jsonExport(HttpSession session) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -74,6 +78,7 @@ public class ProfileController {
             .body(new InputStreamResource(new ByteArrayInputStream(buf)));
 	}
 
+    //Permet d'importer des évenements
     @PostMapping("/admin/profile/import")
     public String multiUploadFileModel(@ModelAttribute("model") FormWrapper model, HttpSession session) throws IOException {
         //transform bytes to string 
@@ -87,6 +92,7 @@ public class ProfileController {
         return "redirect:/admin/profile";
     }
 
+    //Permet de supprimer un utilisateur
     @GetMapping(value = "/admin/profile/delete")
     public String deleteProfil(HttpSession session) {
         this.userEntityService.delete((Long)(session.getAttribute("userId")));

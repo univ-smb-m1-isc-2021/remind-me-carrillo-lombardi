@@ -25,15 +25,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    //when the user is connecting
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService);
         auth.authenticationProvider(new AuthenticationProvider() {
             @Override
             public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-                String email = (String) authentication.getPrincipal();
+                String username = (String) authentication.getPrincipal();
                 String providedPassword = (String) authentication.getCredentials();
-                UserEntity user = userService.findAndAuthenticateUser(email, providedPassword);
+                UserEntity user = userService.findAndAuthenticateUser(username, providedPassword);
 
                 return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             }
@@ -45,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         });
     }
 
+    //Security of the application
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -57,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers("/").permitAll()
+            .antMatchers("/main.css").permitAll()
             .antMatchers("/login").permitAll()
             .antMatchers("/logout").permitAll()
             .antMatchers("/register").permitAll()

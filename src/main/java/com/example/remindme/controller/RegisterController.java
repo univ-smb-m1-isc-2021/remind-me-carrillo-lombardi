@@ -21,8 +21,10 @@ public class RegisterController {
     @Autowired
     UserEntityService userEntityService;
 
+    //Page d'inscription
     @GetMapping(value = "/register")
     public String register(HttpSession session, @RequestParam(required = false) String lang) {
+        //verification de la langue selectionné par l'utilisateur
         if(lang != null && !lang.equals("")) {
 			session.setAttribute("lang", lang);
 		} else {
@@ -34,14 +36,13 @@ public class RegisterController {
         return "register";
     }
 
+    //Créer un utilisateur
     @PostMapping(value="/register/create")
 	public String createEvent(@RequestParam(name = "username") String username,
                         @RequestParam(name = "password") String password,
                         @RequestParam(name = "password2") String password2,
                         @RequestParam(name = "tweeter") String tweeter,
                         @RequestParam(name = "email") String email) {
-
-        System.out.println("::::Dedans::::");
 
         if(!password.equals(password2))
             return "redirect:/register";
