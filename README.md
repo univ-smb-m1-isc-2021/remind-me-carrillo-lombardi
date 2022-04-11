@@ -72,27 +72,26 @@ Il nous manque certaines fonctionnalités comme l'envoie sur discord, messenger,
 main 
 └───java/com/example/remindme
 │   └───classes
-│       └───persistence
-│           │   Event.java
-│           │   EventRepository.java
-│           │   Initializer.java
-│           │   UserEntity.java
-│           │   UserEntityRepository.java
-│       │   FormWrapper.java
+│   │   └───persistence
+│   │   │     └───Event.java: Classe Event pour représenter les évenements
+│   │   │     └───EventRepository.java: Repository pour les events
+│   │   │     └───Initializer.java: Permet de vider et ajouter des données dans les services/bdd
+│   │   │     └───UserEntity.java: Classe UserEntity qui représente les utilisateurs
+│   │   │     └───UserEntityRepository.java: Repository pour les userEntity
+│   │   └───FormWrapper.java: Classe qui permet d'avoir MultiPartFile pour l'import
 │   └───config
-│       │   LanguageConfig.java
-│       │   SecurityConfig.java
+│   │    └───LanguageConfig.java: Permet de configurer les traductions dans l'application
+│   │    └───SecurityConfig.java: Permet de confi
 │   └───controller
-│       │   AdminController.java
-│       │   EventController.java
-│       │   LoginController.java
-│       │   ProfileController.java
-│       │   RegisterController.java
+│   │     └───AdminController.java: Controller de la page admin
+│   │     └───EventController.java: Controller des events
+│   │     └───LoginController.java: Controller de la page login
+│   │     └───ProfileController.java: Controller de la page profile
+│   │     └───RegisterController.java: Controller de la page register
 │   └───service
-│       │   EventService.java
-│       │   UserEntityService.java
-│   │   RemindeMeApplication.java
-│       
+│   │   └───EventService.java: Service pour les events
+│   │   └───UserEntityService.java: Service pour les userEntity
+│   └───RemindeMeApplication.java: Fichier principale pour l'application
 │
 └───resources
 │   │   application.properties: fichier de propriétés de l'application
